@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "waidelosmod",
+  "version": "1.0.0",
+  "name": "Waidelos-mod",
+  "authors": [
+    "Waidelos, MCreator"
+  ],
+  "contact": {
+    "homepage": "https://mcreator.net",
+    "sources": ""
+  },
+  "license": "Not specified",
+  "accessWidener": "waidelosmod.accesswidener",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.mcreator.waidelosmod.WaidelosmodMod"
+    ],
+    "client": [
+      "net.mcreator.waidelosmod.ClientInit"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.21",
+    "fabric": "*",
+    "minecraft": "~1.20",
+    "java": ">=17"
+  },
+  "mixins": [
+    "waidelosmod.mixins.json"
+  ]
+}

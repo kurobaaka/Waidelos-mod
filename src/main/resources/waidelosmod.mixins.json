@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.mcreator.waidelosmod.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+      "WaidelosmodModRepairItemRecipeMixin"  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
