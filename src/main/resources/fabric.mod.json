@@ -1,33 +1,37 @@
 {
-  "schemaVersion": 1,
-  "id": "waidelosmod",
-  "version": "1.0.0",
-  "name": "Waidelos-mod",
-  "authors": [
-    "Waidelos, MCreator"
-  ],
-  "contact": {
-    "homepage": "https://mcreator.net",
-    "sources": ""
-  },
-  "license": "Not specified",
-  "accessWidener": "waidelosmod.accesswidener",
-  "environment": "*",
-  "entrypoints": {
-    "main": [
-      "net.mcreator.waidelosmod.WaidelosmodMod"
-    ],
-    "client": [
-      "net.mcreator.waidelosmod.ClientInit"
-    ]
-  },
-  "depends": {
-    "fabricloader": ">=0.14.21",
-    "fabric": "*",
-    "minecraft": "~1.20",
-    "java": ">=17"
-  },
-  "mixins": [
-    "waidelosmod.mixins.json"
-  ]
+	"schemaVersion": 1,
+	"id": "waidelos-mod",
+	"version": "${version}",
+	"name": "Waidelos Mod",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/waidelos-mod/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.waimod.WaidelosMod"
+		],
+		"fabric-datagen": [
+			"net.waimod.WaidelosModDataGenerator"
+		]
+	},
+	"mixins": [
+		"waidelos-mod.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.20.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
 }
