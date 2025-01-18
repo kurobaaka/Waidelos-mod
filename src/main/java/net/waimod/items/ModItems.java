@@ -1,0 +1,25 @@
+package net.waimod.items;
+
+import net.waimod.WaidelosMod;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries;
+import net.minecraft.item.Item;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.util.Identifier;
+
+public class ModItems {
+    public static final Item newAxe = registerItem("newAxe", new Item(new FabricItemSettings()));
+
+    private static void addItemsIngridientTabItemGroup(FabricItemGroupEntries entries) {
+        entries.add(newAxe);
+    }
+
+    private static Item registerItem(String name, Item item) {
+        return Registry.register(Registries.ITEM, new Identifier(WaidelosMod.MOD_ID, name), item);
+    }
+
+    public static void registredModItems() {
+        WaidelosMod.LOGGER.info("registering mod items for" + WaidelosMod.MOD_ID);
+    }
+}
