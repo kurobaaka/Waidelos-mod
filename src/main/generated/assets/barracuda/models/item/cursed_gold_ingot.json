@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "barracuda:item/cursed_gold_ingot"
+  }
+}

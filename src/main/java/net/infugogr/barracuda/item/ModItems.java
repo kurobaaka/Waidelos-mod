@@ -1,6 +1,5 @@
 package net.infugogr.barracuda.item;
 
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.infugogr.barracuda.Barracuda;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -36,11 +35,10 @@ public class ModItems {
             Item::new, settings -> settings.maxCount(16));
     public static final Item CAPACITOR = register("capacitor");
     public static final Item SCREWDRIVER = register("screwdriver");
+    public static final Item RUBY = register("ruby");
     public static final Item HAMMER = register("hammer");
     public static final IronPlate IRON_PLATE = register("iron_plate",
             IronPlate::new, settings -> settings.maxCount(16));
-
-    public static final Item RUBY = register("ruby");
 
     private static <T extends Item> T registerItem(String name, T item) {
         return Registry.register(Registries.ITEM, Barracuda.id(name), item);

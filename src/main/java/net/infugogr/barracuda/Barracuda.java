@@ -49,8 +49,6 @@ public class Barracuda implements ModInitializer {
 
 		EnergyStorage.SIDED.registerForBlockEntity(HVcableBlockEntity::getEnergyProvider, ModBlockEntityType.HVCABLE);
 
-		
-
 
 		LOGGER.info("Loaded!");
 	}
