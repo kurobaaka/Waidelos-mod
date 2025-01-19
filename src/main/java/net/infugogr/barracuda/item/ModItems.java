@@ -42,7 +42,7 @@ public class ModItems {
     public static final Item SMES_PLATE= register("smes_plate",
             Item::new, settings -> settings.maxCount(16));
     public static final Item CAPACITOR = register("capacitor");
-    public static final Item SCREWDRIVER = register("screwdriver");;
+    public static final Item SCREWDRIVER = register("screwdriver");
     public static final Item HAMMER = register("hammer");
 
     public static final Item LOST_ANCHOR = registerItem("lost_anchor",
