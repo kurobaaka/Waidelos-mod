@@ -30,6 +30,8 @@ public class ModItemGroups {
                         entries.add(ModBlocks.MINERAL_BLOCK);
                         entries.add(ModBlocks.AQUATIC_SAND);
                         entries.add(ModBlocks.MINERAL_CLUSTER);
+                        entries.add(ModItems.ANCHOR);
+                        entries.add(ModItems.LOST_ANCHOR);
                     }).build());
 
     public static final ItemGroup BARRACUDA_MOD_ITEMS_GROUP_2 = Registry.register(Registries.ITEM_GROUP,

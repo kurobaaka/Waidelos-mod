@@ -1,7 +1,9 @@
 package net.infugogr.barracuda.item;
 
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.infugogr.barracuda.Barracuda;
 import net.minecraft.item.Item;
+import net.minecraft.item.SwordItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -39,6 +41,12 @@ public class ModItems {
     public static final Item SCREWDRIVER = register("screwdriver");
     public static final Item RUBY = register("ruby");
     public static final Item HAMMER = register("hammer");
+
+    public static final Item LOST_ANCHOR = registerItem("lost_anchor",
+    new SwordItem(ModToolMaterial.RUBY, 5, 3f, new FabricItemSettings()));
+    public static final Item ANCHOR = registerItem("anchor",
+    new SwordItem(ModToolMaterial.RUBY, 5, 3f, new FabricItemSettings()));
+
     public static final IronPlate IRON_PLATE = register("iron_plate",
             IronPlate::new, settings -> settings.maxCount(16));
 
