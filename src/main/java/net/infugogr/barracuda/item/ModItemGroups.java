@@ -42,6 +42,7 @@ public class ModItemGroups {
                         entries.add(ModBlocks.CURSED_GOLD_BLOCK);
                         entries.add(ModItems.TORMENTED_SOUL);
                         entries.add(ModItems.RUBY);
+                        entries.add(ModItems.HEART_OF_RED_HARBOR);
                     }).build());
 
     public static final ItemGroup BARRACUDA_MOD_ITEMS_GROUP_3 = Registry.register(Registries.ITEM_GROUP,

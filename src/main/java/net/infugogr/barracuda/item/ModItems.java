@@ -19,6 +19,8 @@ public class ModItems {
             TormentedSoul::new, settings -> settings.maxCount(16));
     public static final Item REDSTONEIUM_INGOT = register("redstoneium_ingot");
     public static final Item CHARGED_REDSTONEIUM_INGOT = register("charged_redstoneium_ingot");
+    public static final Item HEART_OF_RED_HARBOR = register("heart_of_red_harbor");
+
     //public static final SwordItem CURSED_KNIFE = registerItem("cursed_knife",
     //        new SwordItem(ToolMaterial.GOLD, 3.0F, -2.4F, new Item.Settings()));
     public static final Item STONE_MORTAR = register("stone_mortar");
