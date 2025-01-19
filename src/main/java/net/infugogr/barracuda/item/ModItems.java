@@ -2,7 +2,11 @@ package net.infugogr.barracuda.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.infugogr.barracuda.Barracuda;
+import net.minecraft.item.AxeItem;
+import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.PickaxeItem;
+import net.minecraft.item.ShovelItem;
 import net.minecraft.item.SwordItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -38,14 +42,28 @@ public class ModItems {
     public static final Item SMES_PLATE= register("smes_plate",
             Item::new, settings -> settings.maxCount(16));
     public static final Item CAPACITOR = register("capacitor");
-    public static final Item SCREWDRIVER = register("screwdriver");
-    public static final Item RUBY = register("ruby");
+    public static final Item SCREWDRIVER = register("screwdriver");;
     public static final Item HAMMER = register("hammer");
 
     public static final Item LOST_ANCHOR = registerItem("lost_anchor",
     new SwordItem(ModToolMaterial.RUBY, 5, 3f, new FabricItemSettings()));
     public static final Item ANCHOR = registerItem("anchor",
     new SwordItem(ModToolMaterial.RUBY, 5, 3f, new FabricItemSettings()));
+
+    public static final Item RUBY = register("ruby");
+    public static final Item RAW_RUBY = registerItem("raw_ruby",
+            new Item(new FabricItemSettings()));
+
+    public static final Item RUBY_PICKAXE = registerItem("ruby_pickaxe",
+            new PickaxeItem(ModToolMaterial.RUBY, 2, 2f, new FabricItemSettings()));
+    public static final Item RUBY_AXE = registerItem("ruby_axe",
+            new AxeItem(ModToolMaterial.RUBY, 3, 1f, new FabricItemSettings()));
+    public static final Item RUBY_SHOVEL = registerItem("ruby_shovel",
+            new ShovelItem(ModToolMaterial.RUBY, 0, 0f, new FabricItemSettings()));
+    public static final Item RUBY_SWORD = registerItem("ruby_sword",
+            new SwordItem(ModToolMaterial.RUBY, 5, 3f, new FabricItemSettings()));
+    public static final Item RUBY_HOE = registerItem("ruby_hoe",
+            new HoeItem(ModToolMaterial.RUBY, 0, 0f, new FabricItemSettings()));
 
     public static final IronPlate IRON_PLATE = register("iron_plate",
             IronPlate::new, settings -> settings.maxCount(16));

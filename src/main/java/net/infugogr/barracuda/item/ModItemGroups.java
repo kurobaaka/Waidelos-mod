@@ -44,6 +44,12 @@ public class ModItemGroups {
                         entries.add(ModBlocks.CURSED_GOLD_BLOCK);
                         entries.add(ModItems.TORMENTED_SOUL);
                         entries.add(ModItems.RUBY);
+                        entries.add(ModItems.RAW_RUBY);
+                        entries.add(ModItems.RUBY_PICKAXE);
+                        entries.add(ModItems.RUBY_AXE);
+                        entries.add(ModItems.RUBY_SHOVEL);
+                        entries.add(ModItems.RUBY_SWORD);
+                        entries.add(ModItems.RUBY_HOE);
                         entries.add(ModItems.HEART_OF_RED_HARBOR);
                     }).build());
 
