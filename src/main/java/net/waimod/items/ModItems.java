@@ -11,10 +11,10 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModItems {
-    public static final Item newAxe = registerItem("newAxe", new Item(new FabricItemSettings()));
+    public static final Item Ruby = registerItem("Ruby", new Item(new FabricItemSettings()));
 
     private static void addItemsIngridientTabItemGroup(FabricItemGroupEntries entries) {
-        entries.add(newAxe);
+        entries.add(Ruby);
     }
 
     private static Item registerItem(String name, Item item) {
@@ -27,3 +27,4 @@ public class ModItems {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(ModItems::addItemsIngridientTabItemGroup);
     }
 }
+// https://youtu.be/5ms6RiR4SQ4?si=heeFsGLDwqXKmxDN 9:18

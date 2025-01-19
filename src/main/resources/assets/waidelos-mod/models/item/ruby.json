@@ -1,6 +1,6 @@
 {
     "parent": "items/generated",
     "textures": {
-        "layer0": "WaidelosMod:item/newAxe"
+        "layer0": "WaidelosMod:item/Ruby"
     }
 }
