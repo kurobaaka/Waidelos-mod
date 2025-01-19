@@ -10,8 +10,11 @@ import net.minecraft.sound.SoundEvents;
 import java.util.function.Supplier;
 
 public enum ModArmorMaterials implements ArmorMaterial {
-    ENGINEER("engineer", 25, new int[] { 3, 8, 6, 3 }, 19,
-            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.RUBY)),
+    RUBY("ruby", 25, new int[] { 3, 8, 6, 3 }, 19,
+        SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.RUBY)),
+
+    // ENGINEER("engineer", 25, new int[] { 3, 8, 6, 3 }, 19,    // ENGINEER - это рабочее название для брони эллектрика
+    //         SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.ENGINEER)),
 
     SAPPHIRE("sapphire", 25, new int[] { 3, 8, 6, 3 }, 19,
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.SAPPHIRE));
