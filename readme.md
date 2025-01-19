@@ -1,5 +1,10 @@
 # Barracuda Mod for [Fabric] 1.20.4
 
+[![Architecury API](https://img.shields.io/badge/Architectury%20API-REQUIRED-1?style=for-the-badge&labelColor=black&color=gold)](https://www.curseforge.com/minecraft/mc-mods/architectury-api)
+[![Cloth Config](https://img.shields.io/badge/Cloth%20Config-REQUIRED-1?style=for-the-badge&labelColor=black&color=gold)](https://www.curseforge.com/minecraft/mc-mods/cloth-config)
+[![Fabric API](https://img.shields.io/badge/Fabric%20API-REQUIRED%20for%20Fabric-1?style=for-the-badge&labelColor=black&color=gold)](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
+---
+
 ## Description
 
 The **Barracuda** mod for Minecraft offers players a unique dive into underwater worlds, blending marine themes with elements of fantasy. This mod expands the game's possibilities by adding new biomes, creatures, and mechanics that make ocean exploration exciting and engaging.
