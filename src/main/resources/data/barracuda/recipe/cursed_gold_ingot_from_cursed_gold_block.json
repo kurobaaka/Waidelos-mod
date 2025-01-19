@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "barracuda:cursed_gold_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "barracuda:cursed_gold_ingot"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=south,is_plated=false": {
+      "model": "barracuda:block/machine_frame",
+      "y": 180
+    },
+    "facing=north,is_plated=false": {
+      "model": "barracuda:block/machine_frame"
+    },
+    "facing=west,is_plated=false": {
+      "model": "barracuda:block/machine_frame",
+      "y": 270
+    },
+    "facing=east,is_plated=false": {
+      "model": "barracuda:block/machine_frame",
+      "y": 90
+    },
+    "facing=south,is_plated=true": {
+      "model": "barracuda:block/machine_frame_plated",
+      "y": 180
+    },
+    "facing=north,is_plated=true": {
+      "model": "barracuda:block/machine_frame_plated"
+    },
+    "facing=west,is_plated=true": {
+      "model": "barracuda:block/machine_frame_plated",
+      "y": 270
+    },
+    "facing=east,is_plated=true": {
+      "model": "barracuda:block/machine_frame_plated",
+      "y": 90
+    }
+  }
+}

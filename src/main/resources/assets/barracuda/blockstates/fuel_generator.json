@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "barracuda:block/fuel_generator",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "barracuda:block/fuel_generator"
+    },
+    "facing=west": {
+      "model": "barracuda:block/fuel_generator",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "barracuda:block/fuel_generator",
+      "y": 180
+    }
+  }
+}

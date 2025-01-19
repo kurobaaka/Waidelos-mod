@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "barracuda:aquatic_sand",
+    "barracuda:mineral_block",
+    "barracuda:mineral_cluster",
+    "barracuda:cursed_gold_block",
+    "barracuda:redstoneium_block",
+    "barracuda:charged_redstoneium_block"
+  ]
+}

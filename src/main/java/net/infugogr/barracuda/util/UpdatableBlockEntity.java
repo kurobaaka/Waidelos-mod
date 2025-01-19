@@ -1,0 +1,50 @@
+package net.infugogr.barracuda.util;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.util.math.BlockPos;
+
+public abstract class UpdatableBlockEntity extends BlockEntity {
+    protected boolean isDirty = false;
+
+    public UpdatableBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
+    }
+
+    public void update() {
+        this.isDirty = true;
+        if (!shouldWaitForEndTick()) {
+            markDirty();
+
+            if (this.world != null && !this.world.isClient) {
+                this.world.updateListeners(this.pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
+            }
+        }
+    }
+
+    public boolean shouldWaitForEndTick() {
+        return true;
+    }
+
+    public void endTick() {
+        if (this.isDirty) {
+            this.isDirty = false;
+
+            markDirty();
+
+            if (this.world != null) {
+                this.world.updateListeners(this.pos, getCachedState(), getCachedState(), Block.NOTIFY_ALL);
+            }
+        }
+    }
+
+    protected abstract void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup);
+
+    protected abstract void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup);
+
+    public abstract NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup);
+}

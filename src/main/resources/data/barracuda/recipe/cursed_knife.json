@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "I": "barracuda:redstoneium_ingot",
+    "R": "minecraft:blaze_rod"
+  },
+  "pattern": [
+    " I",
+    "R "
+  ],
+  "result": {
+    "count": 1,
+    "id": "barracuda:cursed_knife"
+  }
+}

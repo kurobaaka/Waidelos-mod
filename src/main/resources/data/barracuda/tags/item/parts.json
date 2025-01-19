@@ -1,0 +1,9 @@
+{
+  "values": [
+    "barracuda:fuel_generator_plate",
+    "barracuda:smes_plate",
+    "barracuda:capacitor",
+    "barracuda:lv_cable",
+    "barracuda:hv_cable"
+  ]
+}

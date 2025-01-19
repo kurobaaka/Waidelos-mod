@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "barracuda:block/smes",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "barracuda:block/smes"
+    },
+    "facing=west": {
+      "model": "barracuda:block/smes",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "barracuda:block/smes",
+      "y": 180
+    }
+  }
+}
