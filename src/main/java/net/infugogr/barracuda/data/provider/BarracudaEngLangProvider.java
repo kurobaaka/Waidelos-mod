@@ -60,6 +60,7 @@ public class BarracudaEngLangProvider extends FabricLanguageProvider {
         translationBuilder.add(ModItems.URANIUM_INGOT, "Uranium Ingot");
         translationBuilder.add(ModItems.URANIUM_NUGGET, "Uranium Nugget");
         translationBuilder.add(ModBlocks.URANIUM_ORE, "Uranium Ore");
+        translationBuilder.add(ModItems.RUBY, "Ruby");
         addText(translationBuilder, SMESblockEntity.TITLE, "SMES");
         addText(translationBuilder, SMESblockEntity.CHARGE_MODE_BUTTON_TOOLTIP_TEXT, "Charge/Discharge");
 
@@ -77,6 +78,8 @@ public class BarracudaEngLangProvider extends FabricLanguageProvider {
         translationBuilder.add("fgplate1", "§7Requires:§r");
         translationBuilder.add("fgplate2", "§71x capacitor§r");
         translationBuilder.add("fgplate3", "§710x LV cable§r");
+
+        
 
     }
 }
