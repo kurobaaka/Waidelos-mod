@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "category": "armor", 
+    "pattern": [
+        "   ",
+        "# #",
+        "###"
+    ],
+"key": {
+    "#": {
+        "item" : "barracuda:raw_sapphire"
+    }
+},
+"result": {
+    "item": "barracuda:sapphire_boots"
+}
+}
