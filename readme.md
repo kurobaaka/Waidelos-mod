@@ -1,0 +1,2 @@
+- сборка проекта ./gradlew vscode
+- билд ./gradlew build 
