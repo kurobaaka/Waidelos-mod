@@ -20,7 +20,10 @@ public enum ModArmorMaterials implements ArmorMaterial {
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.SAPPHIRE)),
 
     SHROOM("shroom", 25, new int[] { 3, 8, 6, 3 }, 19,
-            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.SAPPHIRE));
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.SAPPHIRE)),
+
+    DRUID_WOOD("druid", 25, new int[] { 3, 8, 6, 3 }, 19,
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.RUBY)); // потом материал на друидскую древесину заменить не забудь
 
     private final String name;
     private final int durabilityMultiplier;

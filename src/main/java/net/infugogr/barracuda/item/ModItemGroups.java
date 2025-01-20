@@ -120,6 +120,10 @@ public class ModItemGroups {
                         entries.add(ModItems.SHROOM_CHESTPLATE);
                         entries.add(ModItems.SHROOM_LEGGINGS);
                         entries.add(ModItems.SHROOM_BOOTS);
+                        entries.add(ModItems.DRUID_HELMET);
+                        entries.add(ModItems.DRUID_CHESTPLATE);
+                        entries.add(ModItems.DRUID_LEGGINGS);
+                        entries.add(ModItems.DRUID_BOOTS);
                      }).build());
 
 

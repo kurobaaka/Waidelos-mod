@@ -110,6 +110,15 @@ public class ModItems {
     public static final Item SHROOM_BOOTS = registerItem("shroom_boots",
             new ArmorItem(ModArmorMaterials.SHROOM, ArmorItem.Type.BOOTS, new FabricItemSettings()));
 
+    public static final Item DRUID_HELMET = registerItem("druid_helmet",
+            new ArmorItem(ModArmorMaterials.DRUID_WOOD, ArmorItem.Type.HELMET, new FabricItemSettings()));
+    public static final Item DRUID_CHESTPLATE = registerItem("druid_chestplate",
+            new ArmorItem(ModArmorMaterials.DRUID_WOOD, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item DRUID_LEGGINGS = registerItem("druid_leggings",
+            new ArmorItem(ModArmorMaterials.DRUID_WOOD, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+    public static final Item DRUID_BOOTS = registerItem("druid_boots",
+            new ArmorItem(ModArmorMaterials.DRUID_WOOD, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+
 
 
     public static final IronPlate IRON_PLATE = register("iron_plate",

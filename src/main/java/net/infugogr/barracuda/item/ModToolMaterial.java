@@ -10,7 +10,10 @@ public enum ModToolMaterial implements ToolMaterial {
             () -> Ingredient.ofItems(ModItems.RUBY)),
     
     SAPPHIRE(5, 650, 4.5f, 3.5f, 26,
-            () -> Ingredient.ofItems(ModItems.SAPPHIRE));
+            () -> Ingredient.ofItems(ModItems.SAPPHIRE)), 
+
+    DRUID_WOOD(5, 650, 4.5f, 3.5f, 26,
+            () -> Ingredient.ofItems(ModItems.RUBY)); // потом материал на друидскую древесину заменить не забудь
 
     private final int miningLevel;
     private final int itemDurability;
