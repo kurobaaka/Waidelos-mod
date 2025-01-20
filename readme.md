@@ -23,3 +23,5 @@ The Barracuda mod is an exciting addition to Minecraft that allows players to ex
 
 - сборка проекта ./gradlew vscode
 - билд ./gradlew build 
+
+https://rpaddons.fandom.com/wiki/Item_Addon
