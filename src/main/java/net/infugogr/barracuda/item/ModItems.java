@@ -54,7 +54,7 @@ public class ModItems {
         // Weapons stuff
 
     public static final Item RUBY = register("ruby");
-    public static final Item RAW_RUBY = registerItem("raw_ruby",
+    public static final Item RUBY_DUST = registerItem("ruby_dust",
             new Item(new FabricItemSettings()));
     public static final Item RUBY_PICKAXE = registerItem("ruby_pickaxe",
             new PickaxeItem(ModToolMaterial.RUBY, 2, 2f, new FabricItemSettings()));
