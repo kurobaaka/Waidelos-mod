@@ -84,13 +84,13 @@ public class ModItems {
         // Armor stuff
 
     public static final Item ENGINEER_HELMET = registerItem("engineer_helmet",
-            new ArmorItem(ModArmorMaterials.ENGINEER, ArmorItem.Type.HELMET, new FabricItemSettings()));
+            new ArmorItem(ModArmorMaterials.RUBY, ArmorItem.Type.HELMET, new FabricItemSettings()));
     public static final Item ENGINEER_CHESTPLATE = registerItem("engineer_chestplate",
-            new ArmorItem(ModArmorMaterials.ENGINEER, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+            new ArmorItem(ModArmorMaterials.RUBY, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
     public static final Item ENGINEER_LEGGINGS = registerItem("engineer_leggings",
-            new ArmorItem(ModArmorMaterials.ENGINEER, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+            new ArmorItem(ModArmorMaterials.RUBY, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
     public static final Item ENGINEER_BOOTS = registerItem("engineer_boots",
-            new ArmorItem(ModArmorMaterials.ENGINEER, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+            new ArmorItem(ModArmorMaterials.RUBY, ArmorItem.Type.BOOTS, new FabricItemSettings()));
 
     public static final Item SAPPHIRE_HELMET = registerItem("sapphire_helmet",
             new ArmorItem(ModArmorMaterials.SAPPHIRE, ArmorItem.Type.HELMET, new FabricItemSettings()));
