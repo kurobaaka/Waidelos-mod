@@ -16,6 +16,7 @@ public class ModItemGroups {
     public static final Text TITLE2 = Text.translatable("itemGroup." + Barracuda.MOD_ID + ".barracuda_cult_items");
     public static final Text TITLE3 = Text.translatable("itemGroup." + Barracuda.MOD_ID + ".barracuda_redstoneium_items");
     public static final Text TITLE4 = Text.translatable("itemGroup." + Barracuda.MOD_ID + ".barracuda_uranium_items");
+    // public static final Text TITLE5 = Text.translatable("itemGroup." + Barracuda.MOD_ID + ".barracuda_druid_items");
 
     public static final ItemGroup BARRACUDA_MOD_ITEMS_GROUP_1 = Registry.register(Registries.ITEM_GROUP,
             Identifier.of(Barracuda.MOD_ID, "barracuda_aquatic_items"),
@@ -43,6 +44,11 @@ public class ModItemGroups {
                         entries.add(ModItems.SAPPHIRE_AXE);
                         entries.add(ModItems.SAPPHIRE_HOE);
                         entries.add(ModItems.SAPPHIRE_PICKAXE);
+
+                        entries.add(ModItems.SHROOM_HELMET);
+                        entries.add(ModItems.SHROOM_CHESTPLATE);
+                        entries.add(ModItems.SHROOM_LEGGINGS);
+                        entries.add(ModItems.SHROOM_BOOTS);
                     }).build());
 
     public static final ItemGroup BARRACUDA_MOD_ITEMS_GROUP_2 = Registry.register(Registries.ITEM_GROUP,
@@ -76,7 +82,7 @@ public class ModItemGroups {
                     }).build());
 
     public static final ItemGroup BARRACUDA_MOD_ITEMS_GROUP_4 = Registry.register(Registries.ITEM_GROUP,
-            Identifier.of(Barracuda.MOD_ID, "barracuda_uranium_items"),
+            Identifier.of(Barracuda.MOD_ID, "barracuda_druid_items"),
             FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.URANIUM_INGOT))
                     .displayName(TITLE4)
                     .entries((displayContext, entries) -> {
@@ -108,6 +114,18 @@ public class ModItemGroups {
                         entries.add(ModItems.ENGINEER_LEGGINGS);
                         entries.add(ModItems.ENGINEER_BOOTS);
                     }).build());
+
+
+                    // public static final ItemGroup BARRACUDA_MOD_ITEMS_GROUP_5 = Registry.register(Registries.ITEM_GROUP,
+                    // Identifier.of(Barracuda.MOD_ID, "barracuda_druid_items"),
+                    // FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.URANIUM_INGOT)) // URANIUM_INGOT потом заменить на друидский прикол
+                    //         .displayName(TITLE5)
+                    //         .entries((displayContext, entries) -> {
+                    //             entries.add(ModItems.SHROOM_HELMET);
+                    //             entries.add(ModItems.SHROOM_CHESTPLATE);
+                    //             entries.add(ModItems.SHROOM_LEGGINGS);
+                    //             entries.add(ModItems.SHROOM_BOOTS);
+                    //         }).build());
 
 
 

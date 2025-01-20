@@ -84,13 +84,13 @@ public class ModItems {
         // Armor stuff
 
     public static final Item ENGINEER_HELMET = registerItem("engineer_helmet",
-            new ArmorItem(ModArmorMaterials.RUBY, ArmorItem.Type.HELMET, new FabricItemSettings()));
+            new ArmorItem(ModArmorMaterials.ENGINEER, ArmorItem.Type.HELMET, new FabricItemSettings()));
     public static final Item ENGINEER_CHESTPLATE = registerItem("engineer_chestplate",
-            new ArmorItem(ModArmorMaterials.RUBY, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+            new ArmorItem(ModArmorMaterials.ENGINEER, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
     public static final Item ENGINEER_LEGGINGS = registerItem("engineer_leggings",
-            new ArmorItem(ModArmorMaterials.RUBY, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+            new ArmorItem(ModArmorMaterials.ENGINEER, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
     public static final Item ENGINEER_BOOTS = registerItem("engineer_boots",
-            new ArmorItem(ModArmorMaterials.RUBY, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+            new ArmorItem(ModArmorMaterials.ENGINEER, ArmorItem.Type.BOOTS, new FabricItemSettings()));
 
     public static final Item SAPPHIRE_HELMET = registerItem("sapphire_helmet",
             new ArmorItem(ModArmorMaterials.SAPPHIRE, ArmorItem.Type.HELMET, new FabricItemSettings()));
@@ -100,6 +100,15 @@ public class ModItems {
             new ArmorItem(ModArmorMaterials.SAPPHIRE, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
     public static final Item SAPPHIRE_BOOTS = registerItem("sapphire_boots",
             new ArmorItem(ModArmorMaterials.SAPPHIRE, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+
+    public static final Item SHROOM_HELMET = registerItem("shroom_helmet",
+            new ArmorItem(ModArmorMaterials.SHROOM, ArmorItem.Type.HELMET, new FabricItemSettings()));
+    public static final Item SHROOM_CHESTPLATE = registerItem("shroom_chestplate",
+            new ArmorItem(ModArmorMaterials.SHROOM, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item SHROOM_LEGGINGS = registerItem("shroom_leggings",
+            new ArmorItem(ModArmorMaterials.SHROOM, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+    public static final Item SHROOM_BOOTS = registerItem("shroom_boots",
+            new ArmorItem(ModArmorMaterials.SHROOM, ArmorItem.Type.BOOTS, new FabricItemSettings()));
 
 
 
