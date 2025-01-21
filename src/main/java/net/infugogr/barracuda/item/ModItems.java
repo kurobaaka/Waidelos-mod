@@ -50,12 +50,19 @@ public class ModItems {
     new SwordItem(ModToolMaterial.RUBY, 5, 3f, new FabricItemSettings()));
     public static final Item ANCHOR = registerItem("anchor",
     new SwordItem(ModToolMaterial.RUBY, 5, 3f, new FabricItemSettings()));
-
-        // Weapons stuff
-
+    public static final Item SAPPHIRE = register("sapphire");
+    public static final Item RAW_SAPPHIRE = registerItem("raw_sapphire",
+            new Item(new FabricItemSettings()));
     public static final Item RUBY = register("ruby");
     public static final Item RUBY_DUST = registerItem("ruby_dust",
             new Item(new FabricItemSettings()));
+    public static final Item MUD = register("mud");
+    public static final Item FIR_CONE = register("fir_cone");
+    public static final Item PINE_CONE = register("pine_cone");
+
+
+        // Weapons stuff
+
     public static final Item RUBY_PICKAXE = registerItem("ruby_pickaxe",
             new PickaxeItem(ModToolMaterial.RUBY, 2, 2f, new FabricItemSettings()));
     public static final Item RUBY_AXE = registerItem("ruby_axe",
@@ -67,9 +74,7 @@ public class ModItems {
     public static final Item RUBY_HOE = registerItem("ruby_hoe",
             new HoeItem(ModToolMaterial.RUBY, 0, 0f, new FabricItemSettings()));
 
-    public static final Item SAPPHIRE = register("sapphire");
-    public static final Item RAW_SAPPHIRE = registerItem("raw_sapphire",
-            new Item(new FabricItemSettings()));
+
     public static final Item SAPPHIRE_PICKAXE = registerItem("sapphire_pickaxe",
             new PickaxeItem(ModToolMaterial.SAPPHIRE, 2, 2f, new FabricItemSettings()));
     public static final Item SAPPHIRE_AXE = registerItem("sapphire_axe",

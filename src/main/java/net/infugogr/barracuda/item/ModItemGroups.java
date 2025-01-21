@@ -113,7 +113,7 @@ public class ModItemGroups {
 
                     public static final ItemGroup BARRACUDA_MOD_ITEMS_GROUP_5 = Registry.register(Registries.ITEM_GROUP,
                     Identifier.of(Barracuda.MOD_ID, "barracuda_druid_items"),
-                    FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.URANIUM_INGOT)) // URANIUM_INGOT потом заменить на друидский прикол
+                    FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.MUD)) // URANIUM_INGOT потом заменить на друидский прикол
                      .displayName(TITLE5)
                      .entries((displayContext, entries) -> {
                         entries.add(ModItems.SHROOM_HELMET);
@@ -124,6 +124,9 @@ public class ModItemGroups {
                         entries.add(ModItems.DRUID_CHESTPLATE);
                         entries.add(ModItems.DRUID_LEGGINGS);
                         entries.add(ModItems.DRUID_BOOTS);
+                        entries.add(ModItems.MUD);
+                        entries.add(ModItems.FIR_CONE);
+                        entries.add(ModItems.PINE_CONE);
                      }).build());
 
 
