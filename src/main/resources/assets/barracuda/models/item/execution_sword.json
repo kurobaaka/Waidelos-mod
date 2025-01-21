@@ -344,13 +344,13 @@
 			"scale": [2, 2, 2]
 		},
 		"firstperson_righthand": {
-			"rotation": [-90, -90, -24],
-			"translation": [-11, 12, -5],
+			"rotation": [0, -90, 25],
+			"translation": [-11, 7.25, -1.25],
 			"scale": [2, 2, 2]
 		},
 		"firstperson_lefthand": {
-			"rotation": [0, -90, -24],
-			"translation": [-11, 12, -5],
+			"rotation": [0, 90, -25],
+			"translation": [16, 7.25, 1.25],
 			"scale": [2, 2, 2]
 		},
 		"ground": {

@@ -77,7 +77,7 @@ public class ModItemGroups {
                         entries.add(ModItems.STEEL_PLATE);
                         entries.add(ModItems.STEEL_SHARDS);
 
-                        // entries.add(ModItems.EXECUTION_SWORD);
+                        entries.add(ModItems.EXECUTION_SWORD);
                     }).build());
 
     public static final ItemGroup BARRACUDA_MOD_ITEMS_GROUP_3 = Registry.register(Registries.ITEM_GROUP,

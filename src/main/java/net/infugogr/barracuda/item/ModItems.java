@@ -110,7 +110,7 @@ public class ModItems {
             new HoeItem(ModToolMaterial.SAPPHIRE, 0, 0f, new FabricItemSettings()));
 
     public static final Item EXECUTION_SWORD = registerItem("execution_sword",
-            new SwordItem(ModToolMaterial.SAPPHIRE, 5, 3f, new FabricItemSettings()));
+            new SwordItem(ModToolMaterial.STEEL, 5, 3f, new FabricItemSettings()));
         
         // Armor stuff
 
