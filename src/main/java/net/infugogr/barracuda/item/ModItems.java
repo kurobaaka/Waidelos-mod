@@ -59,6 +59,18 @@ public class ModItems {
     public static final Item MUD = register("mud");
     public static final Item FIR_CONE = register("fir_cone");
     public static final Item PINE_CONE = register("pine_cone");
+    public static final Item BRONZE_BLADE = register("bronze_blade");
+    public static final Item BRONZE_INGOT = register("bronze_ingot");
+    public static final Item BRONZE_PLATE = register("bronze_plate");
+    public static final Item BRONZE_SHARDS = register("bronze_shards");
+    public static final Item METAL_BLADE = register("metal_blade");
+    public static final Item METAL_PLATE = register("metal_plate");
+    public static final Item METAL_SHARDS = register("metal_shards");
+    public static final Item SILVER_INGOT = register("silver_ingot");
+    public static final Item STEEL_BLADE = register("steel_blade");
+    public static final Item STEEL_INGOT = register("steel_ingot");
+    public static final Item STEEL_PLATE = register("steel_plate");
+    public static final Item STEEL_SHARDS = register("steel_shards");
 
 
         // Weapons stuff
@@ -86,6 +98,9 @@ public class ModItems {
     public static final Item SAPPHIRE_HOE = registerItem("sapphire_hoe",
             new HoeItem(ModToolMaterial.SAPPHIRE, 0, 0f, new FabricItemSettings()));
 
+    public static final Item EXECUTION_SWORD = registerItem("execution_sword",
+            new SwordItem(ModToolMaterial.SAPPHIRE, 5, 3f, new FabricItemSettings()));
+        
         // Armor stuff
 
     public static final Item ENGINEER_HELMET = registerItem("engineer_helmet",
