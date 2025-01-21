@@ -124,6 +124,10 @@ public class ModItemGroups {
                         entries.add(ModItems.ENGINEER_LEGGINGS);
                         entries.add(ModItems.ENGINEER_BOOTS);
 
+                        entries.add(ModItems.ENERGY_HELMET);
+                        entries.add(ModItems.ENERGY_CHESTPLATE);
+                        entries.add(ModItems.ENERGY_LEGGINGS);
+                        entries.add(ModItems.ENERGY_BOOTS);
                         entries.add(ModItems.ENERGY_PICKAXE);
                         entries.add(ModItems.ENERGY_AXE);
                         entries.add(ModItems.ENERGY_SHOVEL);

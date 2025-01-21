@@ -114,6 +114,15 @@ public class ModItems {
         
         // Armor stuff
 
+    public static final Item ENERGY_HELMET = registerItem("energy_helmet",
+        new ArmorItem(ModArmorMaterials.ENERGY, ArmorItem.Type.HELMET, new FabricItemSettings()));
+    public static final Item ENERGY_CHESTPLATE = registerItem("energy_chestplate",
+        new ArmorItem(ModArmorMaterials.ENERGY, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item ENERGY_LEGGINGS = registerItem("energy_leggings",
+        new ArmorItem(ModArmorMaterials.ENERGY, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+    public static final Item ENERGY_BOOTS = registerItem("energy_boots",
+        new ArmorItem(ModArmorMaterials.ENERGY, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+
     public static final Item ENGINEER_HELMET = registerItem("engineer_helmet",
             new ArmorItem(ModArmorMaterials.ENGINEER, ArmorItem.Type.HELMET, new FabricItemSettings()));
     public static final Item ENGINEER_CHESTPLATE = registerItem("engineer_chestplate",
