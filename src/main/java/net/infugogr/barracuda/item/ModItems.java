@@ -1,7 +1,14 @@
 package net.infugogr.barracuda.item;
 
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.infugogr.barracuda.Barracuda;
+import net.minecraft.item.ArmorItem;
+import net.minecraft.item.AxeItem;
+import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.PickaxeItem;
+import net.minecraft.item.ShovelItem;
+import net.minecraft.item.SwordItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -37,8 +44,123 @@ public class ModItems {
             Item::new, settings -> settings.maxCount(16));
     public static final Item CAPACITOR = register("capacitor");
     public static final Item SCREWDRIVER = register("screwdriver");
-    public static final Item RUBY = register("ruby");
     public static final Item HAMMER = register("hammer");
+
+    public static final Item LOST_ANCHOR = registerItem("lost_anchor",
+    new SwordItem(ModToolMaterial.RUBY, 5, 3f, new FabricItemSettings()));
+    public static final Item ANCHOR = registerItem("anchor",
+    new SwordItem(ModToolMaterial.RUBY, 5, 3f, new FabricItemSettings()));
+    public static final Item SAPPHIRE = register("sapphire");
+    public static final Item RAW_SAPPHIRE = registerItem("raw_sapphire",
+            new Item(new FabricItemSettings()));
+    public static final Item RUBY = register("ruby");
+    public static final Item RUBY_DUST = registerItem("ruby_dust",
+            new Item(new FabricItemSettings()));
+    public static final Item MUD = register("mud");
+    public static final Item FIR_CONE = register("fir_cone");
+    public static final Item PINE_CONE = register("pine_cone");
+    public static final Item BRONZE_BLADE = register("bronze_blade");
+    public static final Item BRONZE_INGOT = register("bronze_ingot");
+    public static final Item BRONZE_PLATE = register("bronze_plate");
+    public static final Item BRONZE_SHARDS = register("bronze_shards");
+    public static final Item METAL_BLADE = register("metal_blade");
+    public static final Item METAL_PLATE = register("metal_plate");
+    public static final Item METAL_SHARDS = register("metal_shards");
+    public static final Item SILVER_INGOT = register("silver_ingot");
+    public static final Item STEEL_BLADE = register("steel_blade");
+    public static final Item STEEL_INGOT = register("steel_ingot");
+    public static final Item STEEL_PLATE = register("steel_plate");
+    public static final Item STEEL_SHARDS = register("steel_shards");
+
+
+        // Weapons stuff
+
+    public static final Item RUBY_PICKAXE = registerItem("ruby_pickaxe",
+            new PickaxeItem(ModToolMaterial.RUBY, 2, 2f, new FabricItemSettings()));
+    public static final Item RUBY_AXE = registerItem("ruby_axe",
+            new AxeItem(ModToolMaterial.RUBY, 3, 1f, new FabricItemSettings()));
+    public static final Item RUBY_SHOVEL = registerItem("ruby_shovel",
+            new ShovelItem(ModToolMaterial.RUBY, 0, 0f, new FabricItemSettings()));
+    public static final Item RUBY_SWORD = registerItem("ruby_sword",
+            new SwordItem(ModToolMaterial.RUBY, 5, 3f, new FabricItemSettings()));
+    public static final Item RUBY_HOE = registerItem("ruby_hoe",
+            new HoeItem(ModToolMaterial.RUBY, 0, 0f, new FabricItemSettings()));
+
+    public static final Item ENERGY_PICKAXE = registerItem("energy_pickaxe",
+            new PickaxeItem(ModToolMaterial.ENERGY, 2, 2f, new FabricItemSettings()));
+    public static final Item ENERGY_AXE = registerItem("energy_axe",
+            new AxeItem(ModToolMaterial.ENERGY, 3, 1f, new FabricItemSettings()));
+    public static final Item ENERGY_SHOVEL = registerItem("energy_shovel",
+            new ShovelItem(ModToolMaterial.ENERGY, 0, 0f, new FabricItemSettings()));
+    public static final Item ENERGY_SWORD = registerItem("energy_sword",
+            new SwordItem(ModToolMaterial.ENERGY, 5, 3f, new FabricItemSettings()));
+    public static final Item ENERGY_HOE = registerItem("energy_hoe",
+            new HoeItem(ModToolMaterial.ENERGY, 0, 0f, new FabricItemSettings()));
+
+
+    public static final Item SAPPHIRE_PICKAXE = registerItem("sapphire_pickaxe",
+            new PickaxeItem(ModToolMaterial.SAPPHIRE, 2, 2f, new FabricItemSettings()));
+    public static final Item SAPPHIRE_AXE = registerItem("sapphire_axe",
+            new AxeItem(ModToolMaterial.SAPPHIRE, 3, 1f, new FabricItemSettings()));
+    public static final Item SAPPHIRE_SHOVEL = registerItem("sapphire_shovel",
+            new ShovelItem(ModToolMaterial.SAPPHIRE, 0, 0f, new FabricItemSettings()));
+    public static final Item SAPPHIRE_SWORD = registerItem("sapphire_sword",
+            new SwordItem(ModToolMaterial.SAPPHIRE, 5, 3f, new FabricItemSettings()));
+    public static final Item SAPPHIRE_HOE = registerItem("sapphire_hoe",
+            new HoeItem(ModToolMaterial.SAPPHIRE, 0, 0f, new FabricItemSettings()));
+
+    public static final Item EXECUTION_SWORD = registerItem("execution_sword",
+            new SwordItem(ModToolMaterial.STEEL, 5, 3f, new FabricItemSettings()));
+        
+        // Armor stuff
+
+    public static final Item ENERGY_HELMET = registerItem("energy_helmet",
+        new ArmorItem(ModArmorMaterials.ENERGY, ArmorItem.Type.HELMET, new FabricItemSettings()));
+    public static final Item ENERGY_CHESTPLATE = registerItem("energy_chestplate",
+        new ArmorItem(ModArmorMaterials.ENERGY, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item ENERGY_LEGGINGS = registerItem("energy_leggings",
+        new ArmorItem(ModArmorMaterials.ENERGY, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+    public static final Item ENERGY_BOOTS = registerItem("energy_boots",
+        new ArmorItem(ModArmorMaterials.ENERGY, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+
+    public static final Item ENGINEER_HELMET = registerItem("engineer_helmet",
+            new ArmorItem(ModArmorMaterials.ENGINEER, ArmorItem.Type.HELMET, new FabricItemSettings()));
+    public static final Item ENGINEER_CHESTPLATE = registerItem("engineer_chestplate",
+            new ArmorItem(ModArmorMaterials.ENGINEER, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item ENGINEER_LEGGINGS = registerItem("engineer_leggings",
+            new ArmorItem(ModArmorMaterials.ENGINEER, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+    public static final Item ENGINEER_BOOTS = registerItem("engineer_boots",
+            new ArmorItem(ModArmorMaterials.ENGINEER, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+
+    public static final Item SAPPHIRE_HELMET = registerItem("sapphire_helmet",
+            new ArmorItem(ModArmorMaterials.SAPPHIRE, ArmorItem.Type.HELMET, new FabricItemSettings()));
+    public static final Item SAPPHIRE_CHESTPLATE = registerItem("sapphire_chestplate",
+            new ArmorItem(ModArmorMaterials.SAPPHIRE, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item SAPPHIRE_LEGGINGS = registerItem("sapphire_leggings",
+            new ArmorItem(ModArmorMaterials.SAPPHIRE, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+    public static final Item SAPPHIRE_BOOTS = registerItem("sapphire_boots",
+            new ArmorItem(ModArmorMaterials.SAPPHIRE, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+
+    public static final Item SHROOM_HELMET = registerItem("shroom_helmet",
+            new ArmorItem(ModArmorMaterials.SHROOM, ArmorItem.Type.HELMET, new FabricItemSettings()));
+    public static final Item SHROOM_CHESTPLATE = registerItem("shroom_chestplate",
+            new ArmorItem(ModArmorMaterials.SHROOM, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item SHROOM_LEGGINGS = registerItem("shroom_leggings",
+            new ArmorItem(ModArmorMaterials.SHROOM, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+    public static final Item SHROOM_BOOTS = registerItem("shroom_boots",
+            new ArmorItem(ModArmorMaterials.SHROOM, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+
+    public static final Item DRUID_HELMET = registerItem("druid_helmet",
+            new ArmorItem(ModArmorMaterials.DRUID_WOOD, ArmorItem.Type.HELMET, new FabricItemSettings()));
+    public static final Item DRUID_CHESTPLATE = registerItem("druid_chestplate",
+            new ArmorItem(ModArmorMaterials.DRUID_WOOD, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item DRUID_LEGGINGS = registerItem("druid_leggings",
+            new ArmorItem(ModArmorMaterials.DRUID_WOOD, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
+    public static final Item DRUID_BOOTS = registerItem("druid_boots",
+            new ArmorItem(ModArmorMaterials.DRUID_WOOD, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+
+
+
     public static final IronPlate IRON_PLATE = register("iron_plate",
             IronPlate::new, settings -> settings.maxCount(16));
 

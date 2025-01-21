@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#":"barracuda:redstoneium_ingot"
+    "#": {
+      "item" : "barracuda:redstoneium_ingot"
+    }
   },
   "pattern": [
     "###",
@@ -11,6 +13,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "barracuda:redstoneium_block"
+    "item": "barracuda:redstoneium_block"
   }
 }
