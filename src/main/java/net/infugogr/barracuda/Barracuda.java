@@ -3,12 +3,15 @@ package net.infugogr.barracuda;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
-import net.infugogr.barracuda.block.*;
+import net.infugogr.barracuda.block.ModBlocks;
 import net.infugogr.barracuda.block.entity.*;
+import net.infugogr.barracuda.block.entity.renderer.FuelGeneratorBlockEntityRenderer;
+import net.infugogr.barracuda.block.entity.renderer.SMESBlockEntityRenderer;
 import net.infugogr.barracuda.entity.effect.ModStatusEffects;
 import net.infugogr.barracuda.item.ModItemGroups;
 import net.infugogr.barracuda.item.ModItems;
 import net.infugogr.barracuda.screenhandler.ModScreenHandlerType;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
@@ -42,13 +45,15 @@ public class Barracuda implements ModInitializer {
 		EnergyStorage.SIDED.registerForBlockEntity(SMESblockEntity::getEnergyProvider, ModBlockEntityType.SMES);
 		ItemStorage.SIDED.registerForBlockEntity(SMESblockEntity::getInventoryProvider, ModBlockEntityType.SMES);
 
-		EnergyStorage.SIDED.registerForBlockEntity(TeleporterBlockEntity::getEnergyProvider, ModBlockEntityType.TELEPORTER);
-		ItemStorage.SIDED.registerForBlockEntity(TeleporterBlockEntity::getInventoryProvider, ModBlockEntityType.TELEPORTER);
+		//EnergyStorage.SIDED.registerForBlockEntity(TeleporterBlockEntity::getEnergyProvider, ModBlockEntityType.TELEPORTER);
+		//ItemStorage.SIDED.registerForBlockEntity(TeleporterBlockEntity::getInventoryProvider, ModBlockEntityType.TELEPORTER);
 
 		EnergyStorage.SIDED.registerForBlockEntity(LVcableBlockEntity::getEnergyProvider, ModBlockEntityType.LVCABLE);
 
 		EnergyStorage.SIDED.registerForBlockEntity(HVcableBlockEntity::getEnergyProvider, ModBlockEntityType.HVCABLE);
 
+		BlockEntityRendererFactories.register(ModBlockEntityType.FUEL_GENERATOR, FuelGeneratorBlockEntityRenderer::new);
+		BlockEntityRendererFactories.register(ModBlockEntityType.SMES, SMESBlockEntityRenderer::new);
 
 		LOGGER.info("Loaded!");
 	}

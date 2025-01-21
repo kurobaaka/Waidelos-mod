@@ -1,14 +1,11 @@
 package net.infugogr.barracuda.screenhandler;
 
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.infugogr.barracuda.Barracuda;
-import net.infugogr.barracuda.block.entity.SMESblockEntity;
-import net.infugogr.barracuda.util.ScreenUtils;
 import net.infugogr.barracuda.util.energy.EnergyCounter;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
-import net.minecraft.client.gui.tooltip.Tooltip;
-import net.minecraft.client.gui.widget.ToggleButtonWidget;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -29,20 +26,28 @@ public class SMESScreen extends HandledScreen<SMESScreenHandler> {
 
     @Override
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
-        ScreenUtils.drawTexture(context, TEXTURE, this.x, this.y, 0, 0, this.backgroundWidth, this.backgroundHeight);
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+        RenderSystem.setShaderTexture(0, TEXTURE);
+        int x = (width - backgroundWidth) / 2;
+        int y = (height - backgroundHeight) / 2;
+        context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
 
-        int energy = MathHelper.ceil(this.handler.getEnergyPercent() * 70);
-        context.fill(this.x + 152, this.y + 8 + 70 - energy, this.x + 152 + 16, this.y + 8 + 70, 0xFFFF4040);
+        long energy = this.handler.getEnergy();
+        long maxEnergy = this.handler.getMaxEnergy();
+        int energySize = MathHelper.ceil((float) energy / maxEnergy * 70);
+        context.drawTexture(TEXTURE, x + 152, y + 78 - energySize, 176, 84 - energySize, 16, energySize);
     }
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
+        renderBackground(context, mouseX, mouseY, delta);
         drawMouseoverTooltip(context, mouseX, mouseY);
-
-        int energy = MathHelper.ceil(this.handler.getEnergyPercent() * 66);
-        if (isPointWithinBounds(152, 8, 16, 70, mouseX, mouseY)) {
-            context.drawTooltip(this.textRenderer, Text.literal(EnergyCounter.CounterAh(this.handler.getEnergy()) + " / " + EnergyCounter.CounterAh(this.handler.getMaxEnergy())), mouseX, mouseY);
+        if (isPointWithinBounds(152, 9, 16, 69, mouseX, mouseY)) {
+            long energy = this.handler.getEnergy();
+            long maxEnergy = this.handler.getMaxEnergy();
+            context.drawTooltip(this.textRenderer, Text.literal(EnergyCounter.CounterAh(energy) + " / " + EnergyCounter.CounterAh(maxEnergy)), mouseX, mouseY);
         }
     }
 }

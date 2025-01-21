@@ -23,7 +23,7 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -34,33 +34,42 @@ import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
 
 import java.util.List;
+import java.util.Objects;
 
 import static net.minecraft.block.entity.AbstractFurnaceBlockEntity.createFuelTimeMap;
 
-public class FuelGeneratorBlockEntity extends UpdatableBlockEntity implements SyncableTickableBlockEntity, EnergySpreader, ExtendedScreenHandlerFactory{
+public class FuelGeneratorBlockEntity extends UpdatableBlockEntity implements SyncableTickableBlockEntity, EnergySpreader, ExtendedScreenHandlerFactory {
     public static final Text TITLE = Barracuda.containerTitle("fuel_generator");
-
     private final WrappedEnergyStorage energyStorage = new WrappedEnergyStorage();
     private final WrappedInventoryStorage<SimpleInventory> inventoryStorage = new WrappedInventoryStorage<>();
-
-    private int burnTime = 0;
-    private int fuelTime = 0;
+    protected final PropertyDelegate propertyDelegate;
+    private int progress = 0;
+    private int maxProgress = 0;
     private int output = 0;
 
     public FuelGeneratorBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntityType.FUEL_GENERATOR, pos, state);
-
         this.energyStorage.addStorage(new SyncingEnergyStorage(this, 5000, 0, 100));
         this.inventoryStorage.addInventory(new SyncingSimpleInventory(this, 1));
-    }
-
-    public boolean isFuel(ItemStack stack) {
-        return createFuelTimeMap().containsKey(stack.getItem());
-    }
-
-    public int getFuelTime(ItemStack stack) {
-        return createFuelTimeMap().getOrDefault(stack.getItem(), 0);
-
+        this.propertyDelegate = new PropertyDelegate() {
+            @Override
+            public int get(int index) {
+                return switch (index) {
+                    case 0 -> FuelGeneratorBlockEntity.this.progress;
+                    case 1 -> FuelGeneratorBlockEntity.this.maxProgress;
+                    case 2 -> (int)FuelGeneratorBlockEntity.this.energyStorage.getStorage(null).getAmount();
+                    case 3 -> (int)FuelGeneratorBlockEntity.this.energyStorage.getStorage(null).getCapacity();
+                    default -> 0;
+                };
+            }
+            @Override
+            public void set(int index, int value) {
+            }
+            @Override
+            public int size() {
+                return 4;
+            }
+        };
     }
 
     @Override
@@ -80,32 +89,56 @@ public class FuelGeneratorBlockEntity extends UpdatableBlockEntity implements Sy
 
         spread(this.world, this.pos, energyStorage);
 
-        if (energyStorage.getAmount() > energyStorage.getCapacity()) {
-            energyStorage.amount -= energyStorage.getAmount() - energyStorage.getCapacity();
-            update();
+        if (this.progress >0){
+            this.progress--;
         }
-        if (energyStorage.getAmount() >= energyStorage.getCapacity()-(getEnergyOutput()*0.1))
-            return;
 
-        if (this.burnTime > 0) {
-            this.burnTime--;
-            energyStorage.amount += getEnergyOutput()/220;
-            update();
+        if (energyStorage.getAmount() >= energyStorage.getCapacity()) {
+            if (energyStorage.getAmount() > energyStorage.getCapacity()){
+                energyStorage.amount -= (energyStorage.getAmount() - energyStorage.getCapacity());
+            }
+            return;
+        }
+        if (this.progress > 0) {
+            energyStorage.amount += output;
         } else {
             SimpleInventory inventory = this.inventoryStorage.getInventory(0);
             assert inventory != null;
             ItemStack stack = inventory.getStack(0);
             if (isFuel(stack)) {
-                this.fuelTime = getFuelTime(stack);
-                this.burnTime = getFuelTime(stack);
+                this.maxProgress = getFuelTime(stack);
+                this.progress = getFuelTime(stack);
+                this.output = getFuelTime(stack)/220;
                 stack.decrement(1);
                 update();
             }
         }
     }
 
-    public boolean isValid(ItemStack itemStack, int slot) {
-        return slot == 0 && isFuel(itemStack);
+    @Override
+    public void writeScreenOpeningData(ServerPlayerEntity serverPlayerEntity, PacketByteBuf packetByteBuf) {
+        packetByteBuf.writeBlockPos(this.pos);
+    }
+
+    @Override
+    public void writeNbt(NbtCompound nbt) {
+        nbt.put("EnergyStorage", this.energyStorage.writeNbt());
+        nbt.put("Inventory", this.inventoryStorage.writeNbt());
+        nbt.putInt("BurnTime", this.progress);
+        nbt.putInt("FuelTime", this.maxProgress);
+    }
+
+    @Override
+    public void readNbt(NbtCompound nbt) {
+        this.energyStorage.readNbt(nbt.getList("EnergyStorage", NbtElement.COMPOUND_TYPE));
+        this.inventoryStorage.readNbt(nbt.getList("Inventory", NbtElement.COMPOUND_TYPE));
+        this.progress = nbt.getInt("BurnTime");
+        this.maxProgress = nbt.getInt("FuelTime");
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt() {
+        return createNbt();
     }
 
     @Override
@@ -113,49 +146,17 @@ public class FuelGeneratorBlockEntity extends UpdatableBlockEntity implements Sy
         return TITLE;
     }
 
-    @Nullable
     @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new FuelGeneratorScreenHandler(syncId, playerInventory, this);
+    public @Nullable ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
+        return new FuelGeneratorScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
 
-    @Override
-    public void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
-        super.writeNbt(nbt);
-
-        nbt.put("EnergyStorage", this.energyStorage.writeNbt(registryLookup));
-        nbt.put("Inventory", this.inventoryStorage.writeNbt(registryLookup));
-
-        nbt.putInt("BurnTime", this.burnTime);
-        nbt.putInt("FuelTime", this.fuelTime);
+    public boolean isFuel(ItemStack stack) {
+        return createFuelTimeMap().containsKey(stack.getItem());
     }
 
-    @Override
-    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
-        super.readNbt(nbt);
-
-        this.energyStorage.readNbt(nbt.getList("EnergyStorage", NbtElement.COMPOUND_TYPE), registryLookup);
-        this.inventoryStorage.readNbt(nbt.getList("Inventory", NbtElement.COMPOUND_TYPE), registryLookup);
-
-        this.burnTime = nbt.getInt("BurnTime");
-        this.fuelTime = nbt.getInt("FuelTime");
-    }
-
-    @Nullable
-    @Override
-    public Packet<ClientPlayPacketListener> toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
-    }
-
-    @Override
-    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
-        var nbt = new NbtCompound();
-        writeNbt(nbt, registryLookup);
-        return nbt;
-    }
-
-    public SimpleEnergyStorage getEnergyStorage() {
-        return this.energyStorage.getStorage(null);
+    public int getFuelTime(ItemStack stack) {
+        return createFuelTimeMap().getOrDefault(stack.getItem(), 0);
     }
 
     public WrappedInventoryStorage<SimpleInventory> getWrappedInventoryStorage() {
@@ -166,30 +167,21 @@ public class FuelGeneratorBlockEntity extends UpdatableBlockEntity implements Sy
         return this.energyStorage.getStorage(direction);
     }
 
+    public boolean isValid(ItemStack itemStack, int slot) {
+        return slot == 0 && isFuel(itemStack);
+    }
+
     public InventoryStorage getInventoryProvider(Direction direction) {
         return this.inventoryStorage.getStorage(direction);
     }
 
-    public int getBurnTime() {
-        return this.burnTime;
+    public ItemStack getRenderStack() {
+        return Objects.requireNonNull(this.inventoryStorage.getInventory(0)).getStack(0);
     }
 
-    public int getFuelTime() {
-        return this.fuelTime;
-    }
-
-    public int getEnergyOutput() {
-        SimpleInventory inventory = this.inventoryStorage.getInventory(0);
-        assert inventory != null;
-        ItemStack stack = inventory.getStack(0);
-        if (this.burnTime == 0) {
-            output = getFuelTime(stack);
-        }
-        return output;
-    }
-
+    @Nullable
     @Override
-    public void writeScreenOpeningData(ServerPlayerEntity serverPlayerEntity, PacketByteBuf packetByteBuf) {
-        packetByteBuf.writeBlockPos(this.pos);
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
     }
 }

@@ -4,10 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.infugogr.barracuda.block.entity.ModBlockEntityType;
 import net.infugogr.barracuda.block.entity.SMESblockEntity;
 import net.infugogr.barracuda.util.TickableBlockEntity;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
@@ -117,4 +114,8 @@ public class SMESBlock extends HorizontalFacingBlock implements BlockEntityProvi
         }
     }
 
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
 }

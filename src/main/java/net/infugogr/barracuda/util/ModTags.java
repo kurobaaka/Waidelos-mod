@@ -8,20 +8,12 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
 public class ModTags {
-    public static class Blocks {
+    public static final TagKey<Item> PARTS = of("parts");
+    public static final TagKey<Item> PLATES = of("plates");
+    public static final TagKey<Item> CABELS = of("cabels");
 
-        private static TagKey<Block> createTag(String name) {
-            return TagKey.of(RegistryKeys.BLOCK, Identifier.of(Barracuda.MOD_ID, name));
-        }
+    private static TagKey<Item> of(String name) {
+        return TagKey.of(RegistryKeys.ITEM, Identifier.of(Barracuda.MOD_ID, name));
     }
 
-    public static class Items {
-        public static final TagKey<Item> PARTS = createTag("parts");
-        public static final TagKey<Item> PLATES = createTag("plates");
-        public static final TagKey<Item> CABELS = createTag("cabels");
-
-        private static TagKey<Item> createTag(String name) {
-            return TagKey.of(RegistryKeys.ITEM, Identifier.of(Barracuda.MOD_ID, name));
-        }
-    }
 }

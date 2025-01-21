@@ -121,22 +121,22 @@ public class HVcableBlockEntity extends UpdatableBlockEntity implements Syncable
     }
 
     @Override
-    public void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+    public void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
-        nbt.put("Energy", this.wrappedEnergyStorage.writeNbt(registryLookup));
+        nbt.put("Energy", this.wrappedEnergyStorage.writeNbt());
     }
 
     @Override
-    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+    public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
 
         if(nbt.contains("Energy", NbtElement.LIST_TYPE))
-            this.wrappedEnergyStorage.readNbt(nbt.getList("Energy", NbtElement.COMPOUND_TYPE), registryLookup);
+            this.wrappedEnergyStorage.readNbt(nbt.getList("Energy", NbtElement.COMPOUND_TYPE));
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
-        return null;
+    public NbtCompound toInitialChunkDataNbt() {
+        return createNbt();
     }
 
     public SimpleEnergyStorage getEnergy() {

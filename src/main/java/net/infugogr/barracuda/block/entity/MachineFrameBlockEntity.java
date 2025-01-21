@@ -13,7 +13,6 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
@@ -33,13 +32,13 @@ public class MachineFrameBlockEntity extends UpdatableBlockEntity{
     }
 
     @Override
-    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+    protected void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         Inventories.writeNbt(nbt, this.inventory, true);
     }
 
     @Override
-    protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+    public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
         Inventories.readNbt(nbt, this.inventory);
     }
@@ -51,20 +50,18 @@ public class MachineFrameBlockEntity extends UpdatableBlockEntity{
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
-        var nbt = new NbtCompound();
-        writeNbt(nbt, registryLookup);
-        return nbt;
+    public NbtCompound toInitialChunkDataNbt() {
+        return createNbt();
     }
 
     public ActionResult setStack(ItemStack stack, BlockState state) {
-        if (stack.isIn(ModTags.Items.PLATES) & inventory.get(0).getItem() == Items.AIR) {
+        if (stack.isIn(ModTags.PLATES) & inventory.get(0).getItem() == Items.AIR) {
             add(0, stack);
             Direction direction = state.get(FACING);
             assert world != null;
             world.setBlockState(pos, state.getBlock().getDefaultState().with(FACING, direction).with(IS_PLATED, true), 3);
             return  ActionResult.SUCCESS;
-        } else if (stack.isIn(ModTags.Items.CABELS)) {
+        } else if (stack.isIn(ModTags.CABELS)) {
             if (inventory.get(1).getCount()<10 & inventory.get(0).getCount()==1){
                 add(1, stack);
             }

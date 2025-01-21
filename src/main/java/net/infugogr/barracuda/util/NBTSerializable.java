@@ -43,7 +43,7 @@ public interface NBTSerializable<T extends NbtElement> {
      * @param registryLookup The registry lookup to use when serializing the object.
      * @return The NBT element that represents the object.
      */
-    T writeNbt(RegistryWrapper.WrapperLookup registryLookup);
+    T writeNbt();
 
     /**
      * Reads the object from an NBT element.
@@ -51,5 +51,5 @@ public interface NBTSerializable<T extends NbtElement> {
      * @param nbt The NBT element to read the object from.
      * @param registryLookup The registry lookup to use when deserializing the object.
      */
-    void readNbt(T nbt, RegistryWrapper.WrapperLookup registryLookup);
+    void readNbt(T nbt);
 }

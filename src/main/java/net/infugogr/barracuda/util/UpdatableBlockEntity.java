@@ -41,10 +41,4 @@ public abstract class UpdatableBlockEntity extends BlockEntity {
             }
         }
     }
-
-    protected abstract void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup);
-
-    protected abstract void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup);
-
-    public abstract NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup);
 }

@@ -32,10 +32,9 @@ public class MachineFrameBlock extends HorizontalFacingBlock implements BlockEnt
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         BlockEntity ent = world.getBlockEntity(pos);
-        ItemStack stack;
-        stack = player.getActiveItem();
+        ItemStack stack = player.getStackInHand(hand);
         if (ent instanceof MachineFrameBlockEntity blockEntity) {
-            if (stack.isIn(ModTags.Items.PARTS)) {
+            if (stack.isIn(ModTags.PARTS)) {
                 return blockEntity.setStack(stack, state);
             } else if (stack.getItem() == Items.AIR) {
                 return blockEntity.removeStack(state);
@@ -67,12 +66,12 @@ public class MachineFrameBlock extends HorizontalFacingBlock implements BlockEnt
     }
 
     @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
+    public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return ModBlockEntityType.MACHINE_FRAME.instantiate(pos, state);
     }
 
     @Override
-    public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return ModBlockEntityType.MACHINE_FRAME.instantiate(pos, state);
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
     }
 }

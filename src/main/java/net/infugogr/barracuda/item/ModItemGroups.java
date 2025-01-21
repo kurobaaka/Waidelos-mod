@@ -72,9 +72,9 @@ public class ModItemGroups {
                         entries.add(ModBlocks.DEEPSLATE_URANIUM_ORE);
                         entries.add(ModBlocks.URANIUM_BLOCK);
                         entries.add(ModBlocks.DISCHARGED_URANIUM_BLOCK);
-                        entries.add(ModBlocks.FUEL_GENERATOR);
+                        //entries.add(ModBlocks.FUEL_GENERATOR);
                         entries.add(ModBlocks.LVCABLE);
-                        entries.add(ModBlocks.SMES);
+                        //entries.add(ModBlocks.SMES);
                         entries.add(ModBlocks.MACHINE_FRAME);
                         entries.add(ModItems.FUEL_GENERATOR_PLATE);
                         entries.add(ModItems.SMES_PLATE);
@@ -83,7 +83,7 @@ public class ModItemGroups {
                         entries.add(ModItems.SCREWDRIVER);
                         entries.add(ModItems.HAMMER);
                         entries.add(ModBlocks.WALL_BLOCK);
-                        entries.add(ModBlocks.TELEPORTER);
+                        //entries.add(ModBlocks.TELEPORTER);
                     }).build());
 
 

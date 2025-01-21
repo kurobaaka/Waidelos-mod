@@ -104,7 +104,7 @@ public class WrappedInventoryStorage<T extends SimpleInventory> implements NBTSe
     }
 
     @Override
-    public NbtList writeNbt(RegistryWrapper.WrapperLookup registryLookup) {
+    public NbtList writeNbt() {
         var nbt = new NbtList();
         for (T inventory : this.inventories) {
             var inventoryNbt = new NbtCompound();
@@ -115,7 +115,7 @@ public class WrappedInventoryStorage<T extends SimpleInventory> implements NBTSe
     }
 
     @Override
-    public void readNbt(NbtList nbt, RegistryWrapper.WrapperLookup registryLookup) {
+    public void readNbt(NbtList nbt) {
         for (int index = 0; index < nbt.size(); index++) {
             var inventoryNbt = nbt.getCompound(index);
 

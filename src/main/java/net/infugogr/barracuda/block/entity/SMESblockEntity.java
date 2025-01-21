@@ -27,6 +27,7 @@ import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
@@ -37,6 +38,7 @@ import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
 
 import java.util.List;
+import java.util.Objects;
 
 public class SMESblockEntity extends UpdatableBlockEntity implements SyncableTickableBlockEntity, EnergySpreader, ExtendedScreenHandlerFactory {
     public static final Text TITLE = Barracuda.containerTitle("battery");
@@ -44,14 +46,31 @@ public class SMESblockEntity extends UpdatableBlockEntity implements SyncableTic
 
     private final WrappedInventoryStorage<SimpleInventory> wrappedInventoryStorage = new WrappedInventoryStorage<>();
     private final WrappedEnergyStorage wrappedEnergyStorage = new WrappedEnergyStorage();
-
+    protected final PropertyDelegate propertyDelegate;
     private ChargeMode chargeMode = ChargeMode.DISCHARGE;
 
     public SMESblockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntityType.SMES, pos, state);
 
         this.wrappedInventoryStorage.addInventory(new SyncingSimpleInventory(this, 1));
-        this.wrappedEnergyStorage.addStorage(new SyncingEnergyStorage(this,5000, 0, 100));
+        this.wrappedEnergyStorage.addStorage(new SyncingEnergyStorage(this,5000000, 100, 100));
+        this.propertyDelegate = new PropertyDelegate() {
+            @Override
+            public int get(int index) {
+                return switch (index) {
+                    case 0 -> (int)SMESblockEntity.this.wrappedEnergyStorage.getStorage(null).getAmount();
+                    case 1 -> (int)SMESblockEntity.this.wrappedEnergyStorage.getStorage(null).getCapacity();
+                    default -> 0;
+                };
+            }
+            @Override
+            public void set(int index, int value) {
+            }
+            @Override
+            public int size() {
+                return 2;
+            }
+        };
     }
 
     @Override
@@ -123,23 +142,23 @@ public class SMESblockEntity extends UpdatableBlockEntity implements SyncableTic
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new SMESScreenHandler(syncId, playerInventory, this);
+        return new SMESScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
 
     @Override
-    public void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+    public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
         this.chargeMode = ChargeMode.valueOf(nbt.getString("ChargeMode"));
-        this.wrappedInventoryStorage.readNbt(nbt.getList("Inventory", NbtElement.COMPOUND_TYPE), registryLookup);
-        this.wrappedEnergyStorage.readNbt(nbt.getList("Energy", NbtElement.COMPOUND_TYPE), registryLookup);
+        this.wrappedInventoryStorage.readNbt(nbt.getList("Inventory", NbtElement.COMPOUND_TYPE));
+        this.wrappedEnergyStorage.readNbt(nbt.getList("Energy", NbtElement.COMPOUND_TYPE));
     }
 
     @Override
-    public void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+    public void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         nbt.putString("ChargeMode", this.chargeMode.name());
-        nbt.put("Inventory", this.wrappedInventoryStorage.writeNbt(registryLookup));
-        nbt.put("Energy", this.wrappedEnergyStorage.writeNbt(registryLookup));
+        nbt.put("Inventory", this.wrappedInventoryStorage.writeNbt());
+        nbt.put("Energy", this.wrappedEnergyStorage.writeNbt());
     }
 
     @Nullable
@@ -149,10 +168,12 @@ public class SMESblockEntity extends UpdatableBlockEntity implements SyncableTic
     }
 
     @Override
-    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
-        var nbt = new NbtCompound();
-        writeNbt(nbt, registryLookup);
-        return nbt;
+    public NbtCompound toInitialChunkDataNbt() {
+        return createNbt();
+    }
+
+    public ItemStack getRenderStack() {
+        return Objects.requireNonNull(this.getWrappedInventory().getInventory(0)).getStack(0);
     }
 
     public SimpleEnergyStorage getEnergyProvider(Direction direction) {

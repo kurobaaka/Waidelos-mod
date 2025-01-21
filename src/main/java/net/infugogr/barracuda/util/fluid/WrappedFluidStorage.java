@@ -36,7 +36,7 @@ public class WrappedFluidStorage<T extends Storage<FluidVariant>> extends Wrappe
     }
 
     @Override
-    public NbtList writeNbt(RegistryWrapper.WrapperLookup registryLookup) {
+    public NbtList writeNbt() {
         var list = new NbtList();
         for (T tank : this.storages) {
             for (StorageView<FluidVariant> view : tank.nonEmptyViews()) {
@@ -51,7 +51,7 @@ public class WrappedFluidStorage<T extends Storage<FluidVariant>> extends Wrappe
     }
 
     @Override
-    public void readNbt(NbtList nbt, RegistryWrapper.WrapperLookup registryLookup) {
+    public void readNbt(NbtList nbt) {
         for (int index = 0; index < nbt.size(); index++) {
             var compound = nbt.getCompound(index);
             T storage = this.storages.get(index);

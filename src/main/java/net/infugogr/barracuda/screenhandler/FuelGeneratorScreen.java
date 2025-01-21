@@ -1,17 +1,17 @@
 package net.infugogr.barracuda.screenhandler;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.infugogr.barracuda.Barracuda;
-import net.infugogr.barracuda.util.ScreenUtils;
 import net.infugogr.barracuda.util.energy.EnergyCounter;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
-
-public class FuelGeneratorScreen extends HandledScreen<FuelGeneratorScreenHandler> {
+public class FuelGeneratorScreen  extends HandledScreen<FuelGeneratorScreenHandler> {
     private static final Identifier TEXTURE = Barracuda.id("textures/gui/fuel_generator_gui.png");
 
     public FuelGeneratorScreen(FuelGeneratorScreenHandler handler, PlayerInventory inventory, Text title) {
@@ -26,28 +26,34 @@ public class FuelGeneratorScreen extends HandledScreen<FuelGeneratorScreenHandle
 
     @Override
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
-        ScreenUtils.drawTexture(context, TEXTURE, this.x, this.y, 0, 0, this.backgroundWidth, this.backgroundHeight);
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
+        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
+        RenderSystem.setShaderTexture(0, TEXTURE);
+        int x = (width - backgroundWidth) / 2;
+        int y = (height - backgroundHeight) / 2;
+        context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
 
         long energy = this.handler.getEnergy();
         long maxEnergy = this.handler.getMaxEnergy();
         int energySize = MathHelper.ceil((float) energy / maxEnergy * 70);
-        context.fill(this.x + 152, this.y + 8 + 70 - energySize, this.x + 152 + 16, this.y + 8 + 70, 0xFFFF4040);
-        Text text =  Text.literal("Output: "+ EnergyCounter.CounterWh(this.handler.getEnergyPerTick()));
-        context.drawText(this.textRenderer, text, this.x + 31,this.y + 32,0xFF3e3e3e, false);
+        context.drawTexture(TEXTURE, x + 152, y + 78 - energySize, 176, 84 - energySize, 16, energySize);
 
-        int burnTime = this.handler.getBurnTime();
-        int fuelTime = this.handler.getFuelTime();
+        int burnTime = this.handler.getProgress();
+        int fuelTime = this.handler.getMaxProgress();
         float burnTimePercentage = (float) burnTime / fuelTime;
         int burnTimeSize = Math.round(burnTimePercentage * 14);
-        ScreenUtils.drawTexture(context, TEXTURE, this.x + 9, this.y + 12 + 14 - burnTimeSize, 176, 14 - burnTimeSize, 14, burnTimeSize);
+        context.drawTexture(TEXTURE, this.x + 9, this.y + 26 - burnTimeSize, 176, 14 - burnTimeSize, 14, burnTimeSize);
+
+        Text text =  Text.literal("Output: "+ EnergyCounter.CounterWh(this.handler.getEnergyPerTick()));
+        context.drawText(this.textRenderer, text, x + 31,y + 32,0xFF3e3e3e, false);
     }
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        renderBackground(context, mouseX, mouseY, delta);
         super.render(context, mouseX, mouseY, delta);
         drawMouseoverTooltip(context, mouseX, mouseY);
-
-        if (isPointWithinBounds(152, 8, 16, 70, mouseX, mouseY)) {
+        if (isPointWithinBounds(152, 9, 16, 69, mouseX, mouseY)) {
             long energy = this.handler.getEnergy();
             long maxEnergy = this.handler.getMaxEnergy();
             context.drawTooltip(this.textRenderer, Text.literal(EnergyCounter.CounterAh(energy) + " / " + EnergyCounter.CounterAh(maxEnergy)), mouseX, mouseY);

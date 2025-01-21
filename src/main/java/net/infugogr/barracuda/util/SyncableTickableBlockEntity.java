@@ -24,10 +24,4 @@ public interface SyncableTickableBlockEntity extends TickableBlockEntity {
 
 
     void writeScreenOpeningData(ServerPlayerEntity serverPlayerEntity, PacketByteBuf packetByteBuf);
-
-    void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup);
-
-    void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup);
-
-    NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup);
 }

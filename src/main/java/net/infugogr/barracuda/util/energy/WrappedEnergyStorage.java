@@ -49,7 +49,7 @@ public class WrappedEnergyStorage implements NBTSerializable<NbtList> {
     }
 
     @Override
-    public NbtList writeNbt(RegistryWrapper.WrapperLookup registryLookup) {
+    public NbtList writeNbt() {
         var list = new NbtList();
         for (SimpleEnergyStorage storage : this.storages) {
             var nbt = new NbtCompound();
@@ -61,7 +61,7 @@ public class WrappedEnergyStorage implements NBTSerializable<NbtList> {
     }
 
     @Override
-    public void readNbt(NbtList nbt, RegistryWrapper.WrapperLookup registryLookup) {
+    public void readNbt(NbtList nbt) {
         for (int index = 0; index < nbt.size(); index++) {
             var compound = nbt.getCompound(index);
             this.storages.get(index).amount = compound.getLong("Amount");
