@@ -123,6 +123,12 @@ public class ModItemGroups {
                         entries.add(ModItems.ENGINEER_CHESTPLATE);
                         entries.add(ModItems.ENGINEER_LEGGINGS);
                         entries.add(ModItems.ENGINEER_BOOTS);
+
+                        entries.add(ModItems.ENERGY_PICKAXE);
+                        entries.add(ModItems.ENERGY_AXE);
+                        entries.add(ModItems.ENERGY_SHOVEL);
+                        entries.add(ModItems.ENERGY_SWORD);
+                        entries.add(ModItems.ENERGY_HOE);
                     }).build());
 
 

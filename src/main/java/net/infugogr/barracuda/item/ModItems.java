@@ -86,6 +86,17 @@ public class ModItems {
     public static final Item RUBY_HOE = registerItem("ruby_hoe",
             new HoeItem(ModToolMaterial.RUBY, 0, 0f, new FabricItemSettings()));
 
+    public static final Item ENERGY_PICKAXE = registerItem("energy_pickaxe",
+            new PickaxeItem(ModToolMaterial.ENERGY, 2, 2f, new FabricItemSettings()));
+    public static final Item ENERGY_AXE = registerItem("energy_axe",
+            new AxeItem(ModToolMaterial.ENERGY, 3, 1f, new FabricItemSettings()));
+    public static final Item ENERGY_SHOVEL = registerItem("energy_shovel",
+            new ShovelItem(ModToolMaterial.ENERGY, 0, 0f, new FabricItemSettings()));
+    public static final Item ENERGY_SWORD = registerItem("energy_sword",
+            new SwordItem(ModToolMaterial.ENERGY, 5, 3f, new FabricItemSettings()));
+    public static final Item ENERGY_HOE = registerItem("energy_hoe",
+            new HoeItem(ModToolMaterial.ENERGY, 0, 0f, new FabricItemSettings()));
+
 
     public static final Item SAPPHIRE_PICKAXE = registerItem("sapphire_pickaxe",
             new PickaxeItem(ModToolMaterial.SAPPHIRE, 2, 2f, new FabricItemSettings()));
