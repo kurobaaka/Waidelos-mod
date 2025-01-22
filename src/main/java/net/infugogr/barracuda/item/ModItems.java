@@ -16,7 +16,6 @@ import net.minecraft.registry.RegistryKeys;
 
 import java.util.function.Function;
 
-
 public class ModItems {
     public static final Item AQUATIC_DUST = register("aquatic_dust");
     public static final Item SEA_MINERAL = register("sea_mineral");

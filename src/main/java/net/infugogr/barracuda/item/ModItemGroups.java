@@ -10,7 +10,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
-
 public class ModItemGroups {
     public static final Text TITLE1 = Text.translatable("itemGroup." + Barracuda.MOD_ID + ".barracuda_aquatic_items");
     public static final Text TITLE2 = Text.translatable("itemGroup." + Barracuda.MOD_ID + ".barracuda_cult_items");

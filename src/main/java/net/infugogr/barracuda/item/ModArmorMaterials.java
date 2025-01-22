@@ -10,20 +10,20 @@ import net.minecraft.sound.SoundEvents;
 import java.util.function.Supplier;
 
 public enum ModArmorMaterials implements ArmorMaterial {
-    RUBY("ruby", 25, new int[] { 3, 8, 6, 3 }, 19,
+    RUBY("ruby", 25, new int[] { 2, 6, 5, 2 }, 19,
         SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.RUBY)),
 
-    ENGINEER("engineer", 25, new int[] { 3, 8, 6, 3 }, 19,    // ENGINEER - это рабочее название для брони эллектрика
-            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.RUBY)),
+    ENGINEER("engineer", 25, new int[] { 2, 2, 2, 2 }, 19,    // ENGINEER - это рабочее название для брони эллектрика
+            SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.RUBY)),
 
-    SAPPHIRE("sapphire", 25, new int[] { 3, 8, 6, 3 }, 19,
+    SAPPHIRE("sapphire", 25, new int[] { 2, 6, 5, 2 }, 19,
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.SAPPHIRE)),
 
-    SHROOM("shroom", 25, new int[] { 3, 8, 6, 3 }, 19,
-            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.SAPPHIRE)),
+    SHROOM("shroom", 25, new int[] { 1, 2, 2, 1 }, 19,
+            SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.SAPPHIRE)),
 
-    DRUID_WOOD("druid", 25, new int[] { 3, 8, 6, 3 }, 19,
-            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.RUBY)), // потом материал на друидскую древесину заменить не забудь
+    DRUID_WOOD("druid", 25, new int[] { 3, 6, 6, 3 }, 19,
+            SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.RUBY)), // потом материал на друидскую древесину заменить не забудь
 
     ENERGY("energy", 25, new int[] { 3, 8, 6, 3 }, 19,
             SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.RUBY));
