@@ -2,14 +2,14 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "item" : "minecraft:oak_log"
+      "item": "minecraft:oak_log"
+    }
   },
   "pattern": [
-      "   ",
-      "# #",
-      "# #"
-  ]
-  },
+    "   ",
+    "# #",
+    "# #"
+  ],
   "result": {
     "item": "barracuda:druid_boots"
   }
