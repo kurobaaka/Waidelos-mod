@@ -164,6 +164,11 @@ public class ModItems {
     public static final Item DRUID_BOOTS = registerItem("druid_boots",
             new ArmorItem(ModArmorMaterials.DRUID_WOOD, ArmorItem.Type.BOOTS, new FabricItemSettings()));
 
+    public static final Item MOSS_HELMET = registerItem("moss_helmet",
+            new ArmorItem(ModArmorMaterials.MOSS, ArmorItem.Type.HELMET, new FabricItemSettings()));
+    public static final Item MOSS_CHESTPLATE = registerItem("moss_chestplate",
+            new ArmorItem(ModArmorMaterials.MOSS, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+
 
 
     public static final IronPlate IRON_PLATE = register("iron_plate",

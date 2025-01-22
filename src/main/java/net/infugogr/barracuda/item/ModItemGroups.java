@@ -150,6 +150,8 @@ public class ModItemGroups {
                         entries.add(ModItems.DRUID_CHESTPLATE);
                         entries.add(ModItems.DRUID_LEGGINGS);
                         entries.add(ModItems.DRUID_BOOTS);
+                        entries.add(ModItems.MOSS_HELMET);
+                        entries.add(ModItems.MOSS_CHESTPLATE);
                         entries.add(ModItems.MUD);
                         entries.add(ModItems.FIR_CONE);
                         entries.add(ModItems.PINE_CONE);
