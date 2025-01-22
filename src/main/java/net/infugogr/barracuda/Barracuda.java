@@ -5,8 +5,8 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.infugogr.barracuda.block.ModBlocks;
 import net.infugogr.barracuda.block.entity.*;
-import net.infugogr.barracuda.block.entity.renderer.FuelGeneratorBlockEntityRenderer;
-import net.infugogr.barracuda.block.entity.renderer.SMESBlockEntityRenderer;
+// import net.infugogr.barracuda.block.entity.renderer.FuelGeneratorBlockEntityRenderer;
+// import net.infugogr.barracuda.block.entity.renderer.SMESBlockEntityRenderer;
 import net.infugogr.barracuda.entity.effect.ModStatusEffects;
 import net.infugogr.barracuda.item.ModItemGroups;
 import net.infugogr.barracuda.item.ModItems;
@@ -52,8 +52,8 @@ public class Barracuda implements ModInitializer {
 
 		EnergyStorage.SIDED.registerForBlockEntity(HVcableBlockEntity::getEnergyProvider, ModBlockEntityType.HVCABLE);
 
-		BlockEntityRendererFactories.register(ModBlockEntityType.FUEL_GENERATOR, FuelGeneratorBlockEntityRenderer::new);
-		BlockEntityRendererFactories.register(ModBlockEntityType.SMES, SMESBlockEntityRenderer::new);
+		// BlockEntityRendererFactories.register(ModBlockEntityType.FUEL_GENERATOR, FuelGeneratorBlockEntityRenderer::new);
+		// BlockEntityRendererFactories.register(ModBlockEntityType.SMES, SMESBlockEntityRenderer::new);
 
 		LOGGER.info("Loaded!");
 	}

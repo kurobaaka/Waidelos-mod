@@ -111,6 +111,8 @@ public class ModItems {
 
     public static final Item EXECUTION_SWORD = registerItem("execution_sword",
             new SwordItem(ModToolMaterial.STEEL, 5, 3f, new FabricItemSettings()));
+    public static final Item EXECUTION_AXE = registerItem("execution_axe",
+            new SwordItem(ModToolMaterial.STEEL, 5, 3f, new FabricItemSettings()));
         
         // Armor stuff
 
