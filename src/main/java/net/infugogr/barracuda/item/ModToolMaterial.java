@@ -18,6 +18,9 @@ public enum ModToolMaterial implements ToolMaterial {
     ENERGY(5, 650, 4.5f, 3.5f, 26,
             () -> Ingredient.ofItems(ModItems.RUBY)),
 
+    AQUATIC(5, 650, 4.5f, 3.8f, 26,
+            () -> Ingredient.ofItems(ModItems.AQUATIC_DUST)),
+
     STEEL(5, 650, 4.5f, 6.0f, 26,
             () -> Ingredient.ofItems(ModItems.STEEL_INGOT));
 

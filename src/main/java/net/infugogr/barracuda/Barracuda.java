@@ -26,7 +26,6 @@ public class Barracuda implements ModInitializer {
 		return Text.translatable("container." + MOD_ID + "." + name);
 	}
 
-
 	public void onInitialize() {
 		LOGGER.info("Loading...");
 

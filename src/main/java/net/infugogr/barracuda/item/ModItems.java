@@ -97,6 +97,10 @@ public class ModItems {
     public static final Item ENERGY_HOE = registerItem("energy_hoe",
             new HoeItem(ModToolMaterial.ENERGY, 0, 0f, new FabricItemSettings()));
 
+    public static final Item AQUATIC_SWORD = registerItem("aquatic_longsword",
+            new SwordItem(ModToolMaterial.AQUATIC, 5, 3f, new FabricItemSettings()));
+            
+
 
     public static final Item SAPPHIRE_PICKAXE = registerItem("sapphire_pickaxe",
             new PickaxeItem(ModToolMaterial.SAPPHIRE, 2, 2f, new FabricItemSettings()));
@@ -110,9 +114,9 @@ public class ModItems {
             new HoeItem(ModToolMaterial.SAPPHIRE, 0, 0f, new FabricItemSettings()));
 
     public static final Item EXECUTION_SWORD = registerItem("execution_sword",
-            new SwordItem(ModToolMaterial.STEEL, 5, 3f, new FabricItemSettings()));
+            new SwordItem(ModToolMaterial.STEEL, 5, -3.5f, new FabricItemSettings()));
     public static final Item EXECUTION_AXE = registerItem("execution_axe",
-            new SwordItem(ModToolMaterial.STEEL, 5, 3f, new FabricItemSettings()));
+            new SwordItem(ModToolMaterial.STEEL, 5, -3.5f, new FabricItemSettings()));
         
         // Armor stuff
 
