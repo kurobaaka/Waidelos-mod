@@ -77,6 +77,12 @@ public class ModItemGroups {
                         entries.add(ModItems.STEEL_PLATE);
                         entries.add(ModItems.STEEL_SHARDS);
 
+                        entries.add(ModItems.ILLUSIONER_CHESTPLATE);
+                        entries.add(ModItems.ILLUSIONER_BOOTS);
+
+                        entries.add(ModItems.EVOKER_CHESTPLATE);
+                        entries.add(ModItems.EVOKER_BOOTS);
+
                         entries.add(ModItems.EXECUTION_SWORD);
                         entries.add(ModItems.EXECUTION_AXE);
                     }).build());

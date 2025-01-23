@@ -169,6 +169,16 @@ public class ModItems {
     public static final Item MOSS_CHESTPLATE = registerItem("moss_chestplate",
             new ArmorItem(ModArmorMaterials.MOSS, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
 
+    public static final Item ILLUSIONER_CHESTPLATE = registerItem("illusioner_chestplate",
+            new ArmorItem(ModArmorMaterials.FABRIC, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item ILLUSIONER_BOOTS = registerItem("illusioner_boots",
+            new ArmorItem(ModArmorMaterials.FABRIC, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+
+    public static final Item EVOKER_CHESTPLATE = registerItem("evoker_chestplate",
+            new ArmorItem(ModArmorMaterials.FABRIC_1, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
+    public static final Item EVOKER_BOOTS = registerItem("evoker_boots",
+            new ArmorItem(ModArmorMaterials.FABRIC_1, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+
 
 
     public static final IronPlate IRON_PLATE = register("iron_plate",

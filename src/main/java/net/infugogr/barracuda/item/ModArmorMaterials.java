@@ -24,6 +24,12 @@ public enum ModArmorMaterials implements ArmorMaterial {
 
     MOSS("moss", 25, new int[] { 1, 3, 2, 1 }, 19,
             SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.SAPPHIRE)),
+            
+    FABRIC("illusioner", 25, new int[] { 1, 1, 1, 1 }, 19,
+            SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.SAPPHIRE)),
+
+    FABRIC_1("evoker", 25, new int[] { 1, 1, 1, 1 }, 19,
+            SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.SAPPHIRE)),
 
     DRUID_WOOD("druid", 25, new int[] { 3, 6, 6, 3 }, 19,
             SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.RUBY)), // потом материал на друидскую древесину заменить не забудь
