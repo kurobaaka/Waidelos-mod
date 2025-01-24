@@ -33,7 +33,7 @@ public class ModItemGroups {
                         entries.add(ModItems.ANCHOR);
                         entries.add(ModItems.LOST_ANCHOR);
                         entries.add(ModItems.SAPPHIRE);
-                        entries.add(ModItems.RAW_SAPPHIRE);
+                        entries.add(ModItems.SAPPHIRE_DUST);
                         entries.add(ModItems.SAPPHIRE_HELMET);
                         entries.add(ModItems.SAPPHIRE_CHESTPLATE);
                         entries.add(ModItems.SAPPHIRE_LEGGINGS);

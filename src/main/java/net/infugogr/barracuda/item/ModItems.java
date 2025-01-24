@@ -50,7 +50,7 @@ public class ModItems {
     public static final Item ANCHOR = registerItem("anchor",
     new SwordItem(ModToolMaterial.RUBY, 5, 3f, new FabricItemSettings()));
     public static final Item SAPPHIRE = register("sapphire");
-    public static final Item RAW_SAPPHIRE = registerItem("raw_sapphire",
+    public static final Item SAPPHIRE_DUST = registerItem("sapphire_dust",
             new Item(new FabricItemSettings()));
     public static final Item RUBY = register("ruby");
     public static final Item RUBY_DUST = registerItem("ruby_dust",
