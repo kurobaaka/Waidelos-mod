@@ -1,8 +1,6 @@
 package net.infugogr.barracuda.util;
 
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.List;

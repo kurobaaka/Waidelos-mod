@@ -1,7 +1,6 @@
 package net.infugogr.barracuda;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.infugogr.barracuda.block.ModBlocks;
 import net.infugogr.barracuda.block.entity.*;
@@ -11,7 +10,6 @@ import net.infugogr.barracuda.entity.effect.ModStatusEffects;
 import net.infugogr.barracuda.item.ModItemGroups;
 import net.infugogr.barracuda.item.ModItems;
 import net.infugogr.barracuda.screenhandler.ModScreenHandlerType;
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
@@ -28,7 +26,6 @@ public class Barracuda implements ModInitializer {
 
 	public void onInitialize() {
 		LOGGER.info("Loading...");
-
 		// Load registry classes
 		ModItems.registerModItems();
 		ModItemGroups.registerItemGroups();

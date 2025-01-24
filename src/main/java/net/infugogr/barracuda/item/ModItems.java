@@ -119,6 +119,7 @@ public class ModItems {
     public static final Item SAPPHIRE_HOE = registerItem("sapphire_hoe",
             new HoeItem(ModToolMaterial.SAPPHIRE, 0, 0f, new FabricItemSettings()));
 
+            
     public static final Item EXECUTION_SWORD = registerItem("execution_sword",
             new SwordItem(ModToolMaterial.STEEL, 5, -3.5f, new FabricItemSettings()));
     public static final Item EXECUTION_AXE = registerItem("execution_axe",

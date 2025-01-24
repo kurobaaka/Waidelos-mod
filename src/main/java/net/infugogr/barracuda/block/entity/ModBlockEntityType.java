@@ -1,6 +1,5 @@
 package net.infugogr.barracuda.block.entity;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.infugogr.barracuda.Barracuda;
 import net.infugogr.barracuda.block.ModBlocks;
 import net.minecraft.block.entity.BlockEntity;

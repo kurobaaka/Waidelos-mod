@@ -1,7 +1,6 @@
 package net.infugogr.barracuda.block;
 
 import net.infugogr.barracuda.block.entity.HVcableBlockEntity;
-import net.infugogr.barracuda.block.entity.LVcableBlockEntity;
 import net.infugogr.barracuda.block.entity.ModBlockEntityType;
 import net.infugogr.barracuda.util.TickableBlockEntity;
 import net.minecraft.block.*;
