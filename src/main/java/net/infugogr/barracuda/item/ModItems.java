@@ -98,6 +98,13 @@ public class ModItems {
 
     public static final Item AQUATIC_SWORD = registerItem("aquatic_longsword",
             new SwordItem(ModToolMaterial.AQUATIC, 5, 3f, new FabricItemSettings()));
+
+    public static final Item DWARVEN_PICKAXE = registerItem("dwarven_pickaxe",
+            new PickaxeItem(ModToolMaterial.SAPPHIRE, 2, 2f, new FabricItemSettings()));
+    public static final Item DWARVEN_AXE = registerItem("dwarven_axe",
+            new AxeItem(ModToolMaterial.SAPPHIRE, 3, 1f, new FabricItemSettings()));
+    public static final Item DWARVEN_SHOVEL = registerItem("dwarven_shovel",
+            new ShovelItem(ModToolMaterial.SAPPHIRE, 0, 0f, new FabricItemSettings()));
             
 
 
@@ -179,6 +186,12 @@ public class ModItems {
     public static final Item EVOKER_BOOTS = registerItem("evoker_boots",
             new ArmorItem(ModArmorMaterials.FABRIC_1, ArmorItem.Type.BOOTS, new FabricItemSettings()));
 
+        // food items
+
+    public static final Item PORK = registerItem("pork", new Item(new FabricItemSettings().food(ModFoodComponents.PORK)));
+    public static final Item PORK_COOKED = registerItem("pork_cooked", new Item(new FabricItemSettings().food(ModFoodComponents.PORK_COOKED)));
+    public static final Item CHICKEN_WING = registerItem("chicken_wing", new Item(new FabricItemSettings().food(ModFoodComponents.CHICKEN_WING)));
+    public static final Item CHICKEN_WING_COOKED = registerItem("chicken_wing_cooked", new Item(new FabricItemSettings().food(ModFoodComponents.CHICKEN_WING_COOKED)));
 
 
     public static final IronPlate IRON_PLATE = register("iron_plate",

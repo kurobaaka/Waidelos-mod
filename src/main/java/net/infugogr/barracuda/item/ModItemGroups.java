@@ -16,6 +16,7 @@ public class ModItemGroups {
     public static final Text TITLE3 = Text.translatable("itemGroup." + Barracuda.MOD_ID + ".barracuda_redstoneium_items");
     public static final Text TITLE4 = Text.translatable("itemGroup." + Barracuda.MOD_ID + ".barracuda_uranium_items");
     public static final Text TITLE5 = Text.translatable("itemGroup." + Barracuda.MOD_ID + ".barracuda_druid_items");
+    public static final Text TITLE6 = Text.translatable("itemGroup." + Barracuda.MOD_ID + ".barracuda_food_items");
 
     public static final ItemGroup BARRACUDA_MOD_ITEMS_GROUP_1 = Registry.register(Registries.ITEM_GROUP,
             Identifier.of(Barracuda.MOD_ID, "barracuda_aquatic_items"),
@@ -142,7 +143,6 @@ public class ModItemGroups {
                         entries.add(ModItems.ENERGY_HOE);
                     }).build());
 
-
                     public static final ItemGroup BARRACUDA_MOD_ITEMS_GROUP_5 = Registry.register(Registries.ITEM_GROUP,
                     Identifier.of(Barracuda.MOD_ID, "barracuda_druid_items"),
                     FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.MUD)) // URANIUM_INGOT потом заменить на друидский прикол
@@ -161,7 +161,22 @@ public class ModItemGroups {
                         entries.add(ModItems.MUD);
                         entries.add(ModItems.FIR_CONE);
                         entries.add(ModItems.PINE_CONE);
+
+                        entries.add(ModItems.DWARVEN_PICKAXE);
+                        entries.add(ModItems.DWARVEN_AXE);
+                        entries.add(ModItems.DWARVEN_SHOVEL);
                      }).build());
+                    
+                     public static final ItemGroup BARRACUDA_MOD_ITEMS_GROUP_6 = Registry.register(Registries.ITEM_GROUP,
+                     Identifier.of(Barracuda.MOD_ID, "barracuda_food_items"),
+                     FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.CHICKEN_WING_COOKED))
+                      .displayName(TITLE6)
+                      .entries((displayContext, entries) -> {
+                         entries.add(ModItems.PORK);
+                         entries.add(ModItems.PORK_COOKED);
+                         entries.add(ModItems.CHICKEN_WING);
+                         entries.add(ModItems.CHICKEN_WING_COOKED);
+                      }).build());
 
 
 
