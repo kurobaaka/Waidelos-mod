@@ -1,9 +1,12 @@
 package net.infugogr.barracuda;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.infugogr.barracuda.block.ModBlocks;
 import net.infugogr.barracuda.block.entity.*;
+import net.infugogr.barracuda.entity.ModEntities;
+import net.infugogr.barracuda.entity.custom.PorcupineEntity;
 // import net.infugogr.barracuda.block.entity.renderer.FuelGeneratorBlockEntityRenderer;
 // import net.infugogr.barracuda.block.entity.renderer.SMESBlockEntityRenderer;
 import net.infugogr.barracuda.entity.effect.ModStatusEffects;
@@ -51,6 +54,7 @@ public class Barracuda implements ModInitializer {
 		// BlockEntityRendererFactories.register(ModBlockEntityType.FUEL_GENERATOR, FuelGeneratorBlockEntityRenderer::new);
 		// BlockEntityRendererFactories.register(ModBlockEntityType.SMES, SMESBlockEntityRenderer::new);
 
+		FabricDefaultAttributeRegistry.register(ModEntities.PORCUPINE, PorcupineEntity.createPorcupineAttributes());
 		LOGGER.info("Loaded!");
 	}
 
