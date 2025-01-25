@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
+import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
@@ -21,11 +22,11 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class PorcupineEntity extends AnimalEntity {
+public class PirateEntity extends AnimalEntity {
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
 
-    public PorcupineEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+    public PirateEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -66,7 +67,7 @@ public class PorcupineEntity extends AnimalEntity {
         this.goalSelector.add(6, new LookAroundGoal(this));
     }
 
-    public static DefaultAttributeContainer.Builder createPorcupineAttributes() {
+    public static DefaultAttributeContainer.Builder createPirateAttributes() {
         return MobEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 15)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2f)
@@ -82,7 +83,7 @@ public class PorcupineEntity extends AnimalEntity {
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        return ModEntities.PORCUPINE.create(world);
+        return ModEntities.PIRATE.create(world);
     }
 
     @Nullable
