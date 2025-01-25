@@ -1,9 +1,11 @@
 package net.infugogr.barracuda;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.infugogr.barracuda.block.ModBlocks;
 import net.infugogr.barracuda.block.entity.*;
+import net.infugogr.barracuda.entity.client.CrappieFishRenderer;
 // import net.infugogr.barracuda.block.entity.renderer.FuelGeneratorBlockEntityRenderer;
 // import net.infugogr.barracuda.block.entity.renderer.SMESBlockEntityRenderer;
 import net.infugogr.barracuda.entity.effect.ModStatusEffects;
@@ -24,6 +26,7 @@ public class Barracuda implements ModInitializer {
 		return Text.translatable("container." + MOD_ID + "." + name);
 	}
 
+
 	public void onInitialize() {
 		LOGGER.info("Loading...");
 		// Load registry classes
@@ -33,6 +36,9 @@ public class Barracuda implements ModInitializer {
 		ModStatusEffects.registerEffects();
 		ModScreenHandlerType.registerModScreenHandlerType();
 		ModBlockEntityType.registerModBlockEntityType();
+
+		ModEntities.register();
+        EntityRendererRegistry.register(ModEntities.CRAPPIE_FISH, CrappieFishRenderer::new);
 
 		// Item Lookup
 		EnergyStorage.SIDED.registerForBlockEntity(FuelGeneratorBlockEntity::getEnergyProvider, ModBlockEntityType.FUEL_GENERATOR);
