@@ -1,7 +1,6 @@
 package net.infugogr.barracuda.entity.client;
 
 
-import net.infugogr.barracuda.entity.animation.ModAnimations;
 import net.infugogr.barracuda.entity.custom.BassFishEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
@@ -9,9 +8,10 @@ import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
-   
-public class BassFishModel extends EntityModel<Entity> {
+import net.minecraft.entity.passive.AnimalEntity;
+// public class BassFishModel<T extends BassFishEntity> extends SinglePartEntityModel<T>
+// public class BassFishModel<B extends AnimalEntity> extends EntityModel<Entity>
+public class BassFishModel<T extends BassFishEntity> extends SinglePartEntityModel<T> {
 	private final ModelPart body;
 	private final ModelPart tail;
 	private final ModelPart head;
@@ -40,11 +40,22 @@ public class BassFishModel extends EntityModel<Entity> {
 		ModelPartData head = body.addChild("head", ModelPartBuilder.create().uv(17, 0).cuboid(0.0F, -1.5F, -4.0F, 2.0F, 4.0F, 4.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, -3.0F));
 		return TexturedModelData.of(modelData, 32, 32);
 	}
-	@Override
-	public void setAngles(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-	}
+	// @Override
+	// public void setAngles(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	// }
 	@Override
 	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
 		body.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+	}
+	@Override
+	public ModelPart getPart() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getPart'");
+	}
+	@Override
+	public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw,
+			float headPitch) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'setAngles'");
 	}
 }

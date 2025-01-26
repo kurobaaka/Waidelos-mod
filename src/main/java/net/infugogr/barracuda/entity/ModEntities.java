@@ -3,6 +3,7 @@ package net.infugogr.barracuda.entity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.infugogr.barracuda.Barracuda;
 import net.infugogr.barracuda.entity.custom.PorcupineEntity;
+import net.infugogr.barracuda.entity.custom.BassFishEntity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -15,9 +16,9 @@ public class ModEntities {
             new Identifier(Barracuda.MOD_ID, "porcupine"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, PorcupineEntity::new)
                     .dimensions(EntityDimensions.fixed(1f, 1f)).build());
-    public static final EntityType<PorcupineEntity> BASS_FISH = Registry.register(Registries.ENTITY_TYPE,
+    public static final EntityType< BassFishEntity> BASS_FISH = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(Barracuda.MOD_ID, "bass_fish"),
-            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, PorcupineEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, BassFishEntity::new)
                     .dimensions(EntityDimensions.fixed(1f, 1f)).build());
 
 }
