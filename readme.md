@@ -1,6 +1,6 @@
 # Barracuda Mod for [Fabric] 1.20.4
 
-![preview](https://github.com/kurobaaka/barracuda-mc-mod/blob/main/minecraft_title.png)
+![barracuda mod big logo](https://cdn.modrinth.com/data/cached_images/609ee1c52e1c14ecf0da7ddd6c0ffbf42b9b9262.png)
 
 [![Architecury API](https://img.shields.io/badge/Architectury%20API-REQUIRED-1?style=for-the-badge&labelColor=black&color=gold)](https://www.curseforge.com/minecraft/mc-mods/architectury-api)
 [![Cloth Config](https://img.shields.io/badge/Cloth%20Config-REQUIRED-1?style=for-the-badge&labelColor=black&color=gold)](https://www.curseforge.com/minecraft/mc-mods/cloth-config)
