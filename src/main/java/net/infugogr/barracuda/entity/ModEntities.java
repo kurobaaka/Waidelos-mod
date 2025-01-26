@@ -15,5 +15,9 @@ public class ModEntities {
             new Identifier(Barracuda.MOD_ID, "porcupine"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, PorcupineEntity::new)
                     .dimensions(EntityDimensions.fixed(1f, 1f)).build());
+    public static final EntityType<PorcupineEntity> BASS_FISH = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(Barracuda.MOD_ID, "bass_fish"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, PorcupineEntity::new)
+                    .dimensions(EntityDimensions.fixed(1f, 1f)).build());
 
 }
