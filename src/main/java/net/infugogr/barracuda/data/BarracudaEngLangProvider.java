@@ -1,4 +1,4 @@
-package net.infugogr.barracuda.data.provider;
+package net.infugogr.barracuda.data;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
@@ -6,7 +6,6 @@ import net.infugogr.barracuda.Barracuda;
 import net.infugogr.barracuda.block.ModBlocks;
 import net.infugogr.barracuda.item.ModItemGroups;
 import net.infugogr.barracuda.item.ModItems;
-import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableTextContent;
 import org.jetbrains.annotations.NotNull;

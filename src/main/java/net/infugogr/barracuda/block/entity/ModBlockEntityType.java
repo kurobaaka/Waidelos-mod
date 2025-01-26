@@ -29,9 +29,9 @@ public class ModBlockEntityType {
             BlockEntityType.Builder.create(SMESblockEntity::new, ModBlocks.SMES)
                     .build());
 
-    //public static final BlockEntityType<TeleporterBlockEntity> TELEPORTER = register("teleporter",
-    //        BlockEntityType.Builder.create(TeleporterBlockEntity::new, ModBlocks.TELEPORTER)
-    //                .build());
+    public static final BlockEntityType<TeleporterBlockEntity> TELEPORTER = register("teleporter",
+            BlockEntityType.Builder.create(TeleporterBlockEntity::new, ModBlocks.TELEPORTER)
+                    .build());
 
     public static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType<T> type) {
         return Registry.register(Registries.BLOCK_ENTITY_TYPE, Barracuda.id(name), type);
