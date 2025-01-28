@@ -7,6 +7,8 @@ import net.infugogr.barracuda.entity.ModEntities;
 import net.infugogr.barracuda.entity.client.ModModelLayers;
 import net.infugogr.barracuda.entity.client.PorcupineModel;
 import net.infugogr.barracuda.entity.client.PorcupineRenderer;
+import net.infugogr.barracuda.entity.client.AzureSerpentModel;
+import net.infugogr.barracuda.entity.client.AzureSerpentRenderer;
 import net.infugogr.barracuda.entity.client.BassFishModel;
 import net.infugogr.barracuda.entity.client.BassFishRenderer;
 import net.infugogr.barracuda.screenhandler.FuelGeneratorScreen;
@@ -28,6 +30,9 @@ public class BarracudaClient implements ClientModInitializer {
         
         EntityRendererRegistry.register(ModEntities.BASS_FISH, BassFishRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.BASS_FISH, BassFishModel::getTexturedModelData);
+
+        EntityRendererRegistry.register(ModEntities.AZURE_SERPENT, AzureSerpentRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(ModModelLayers.AZURE_SERPENT, AzureSerpentModel::getTexturedModelData);
 
         //BlockEntityRendererFactories.register(ModBlockEntityType.TELEPORTER, TeleporterRenderer::new);
     }
