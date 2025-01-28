@@ -58,6 +58,10 @@ public class ModItemGroups {
                         entries.add(ModItems.TORMENTED_SOUL);
                         entries.add(ModItems.RUBY);
                         entries.add(ModItems.RUBY_DUST);
+                        entries.add(ModItems.RUBY_HELMET);
+                        entries.add(ModItems.RUBY_CHESTPLATE);
+                        entries.add(ModItems.RUBY_LEGGINGS);
+                        entries.add(ModItems.RUBY_BOOTS);
                         entries.add(ModItems.RUBY_PICKAXE);
                         entries.add(ModItems.RUBY_AXE);
                         entries.add(ModItems.RUBY_SHOVEL);
