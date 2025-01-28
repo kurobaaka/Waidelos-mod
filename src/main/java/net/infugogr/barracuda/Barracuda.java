@@ -1,13 +1,13 @@
 package net.infugogr.barracuda;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemStorage;
 import net.infugogr.barracuda.block.ModBlocks;
 import net.infugogr.barracuda.block.entity.*;
 import net.infugogr.barracuda.entity.ModEntities;
 import net.infugogr.barracuda.entity.custom.AzureSerpentEntity;
+import net.infugogr.barracuda.entity.custom.BarracudaEntity;
 import net.infugogr.barracuda.entity.custom.BassFishEntity;
 import net.infugogr.barracuda.entity.custom.PorcupineEntity;
 // import net.infugogr.barracuda.block.entity.renderer.FuelGeneratorBlockEntityRenderer;
@@ -61,6 +61,11 @@ public class Barracuda implements ModInitializer {
 		FabricDefaultAttributeRegistry.register(ModEntities.PORCUPINE, PorcupineEntity.createPorcupineAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.BASS_FISH, BassFishEntity.createBassFishAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.AZURE_SERPENT, AzureSerpentEntity.createAzureSerpentAttributes());
+
+
+		// geco mobs
+		FabricDefaultAttributeRegistry.register(ModEntities.BARRACUDA, BarracudaEntity.setAttributes());
+
 		LOGGER.info("Loaded!");
 	}
 
