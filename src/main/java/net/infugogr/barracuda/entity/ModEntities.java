@@ -5,6 +5,7 @@ import net.infugogr.barracuda.Barracuda;
 import net.infugogr.barracuda.entity.custom.PorcupineEntity;
 import net.infugogr.barracuda.entity.custom.AzureSerpentEntity;
 import net.infugogr.barracuda.entity.custom.BarracudaEntity;
+import net.infugogr.barracuda.entity.custom.AzureReaperEntity;
 import net.infugogr.barracuda.entity.custom.BassFishEntity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
@@ -32,6 +33,11 @@ public class ModEntities {
     public static final EntityType<BarracudaEntity> BARRACUDA = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(Barracuda.MOD_ID, "barracuda"),
             FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, BarracudaEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.5f, 1.75f)).build());
+
+    public static final EntityType<AzureReaperEntity> AZUER_REAPER = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(Barracuda.MOD_ID, "azure_reaper"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, AzureReaperEntity::new)
                     .dimensions(EntityDimensions.fixed(1.5f, 1.75f)).build());
     }
 

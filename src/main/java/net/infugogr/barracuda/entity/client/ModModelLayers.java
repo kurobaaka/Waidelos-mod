@@ -16,4 +16,7 @@ public class ModModelLayers {
 
     public static final EntityModelLayer BARRACUDA = 
         new EntityModelLayer(new Identifier(Barracuda.MOD_ID, "barracuda"), "main");
+
+    public static final EntityModelLayer AZURE_REAPER = 
+        new EntityModelLayer(new Identifier(Barracuda.MOD_ID, "azure_reaper"), "main");
 }

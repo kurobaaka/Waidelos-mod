@@ -16,6 +16,7 @@ import net.infugogr.barracuda.entity.effect.ModStatusEffects;
 import net.infugogr.barracuda.item.ModItemGroups;
 import net.infugogr.barracuda.item.ModItems;
 import net.infugogr.barracuda.screenhandler.ModScreenHandlerType;
+import net.infugogr.barracuda.sound.ModSounds;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
@@ -40,6 +41,7 @@ public class Barracuda implements ModInitializer {
 		ModStatusEffects.registerEffects();
 		ModScreenHandlerType.registerModScreenHandlerType();
 		ModBlockEntityType.registerModBlockEntityType();
+		ModSounds.registerSounds();
 
 		// Item Lookup
 		EnergyStorage.SIDED.registerForBlockEntity(FuelGeneratorBlockEntity::getEnergyProvider, ModBlockEntityType.FUEL_GENERATOR);
@@ -65,6 +67,7 @@ public class Barracuda implements ModInitializer {
 
 		// geco mobs
 		FabricDefaultAttributeRegistry.register(ModEntities.BARRACUDA, BarracudaEntity.setAttributes());
+		FabricDefaultAttributeRegistry.register(ModEntities.AZUER_REAPER, BarracudaEntity.setAttributes());
 
 		LOGGER.info("Loaded!");
 	}
