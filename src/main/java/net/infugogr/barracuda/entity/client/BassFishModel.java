@@ -7,8 +7,6 @@ import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 
-// public class BassFishModel<T extends BassFishEntity> extends SinglePartEntityModel<T>
-// public class BassFishModel<B extends AnimalEntity> extends EntityModel<Entity>
 public class BassFishModel<T extends BassFishEntity> extends SinglePartEntityModel<T> {
 	private final ModelPart body;
     private final ModelPart head;
@@ -18,7 +16,6 @@ public class BassFishModel<T extends BassFishEntity> extends SinglePartEntityMod
 		this.head = body.getChild("body").getChild("head");
         ModelPart tail = body.getChild("body").getChild("tail");
     }
-
 
     public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
