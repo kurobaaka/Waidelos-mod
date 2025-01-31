@@ -9,7 +9,6 @@ import net.minecraft.entity.ai.goal.SwimAroundGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.FishEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -30,12 +30,19 @@ public class AzureReaperEntity extends FishEntity implements GeoEntity {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
     private int attackCooldown = 0;
 
+    // Хитбоксы для тела, головы и хвоста
+    private Box bodyHitbox;
+    private Box headHitbox;
+    private Box tailHitbox;
+
     public AzureReaperEntity(EntityType<? extends FishEntity> entityType, World world) {
         super(entityType, world);
+        // Инициализация хитбоксов
+        updateHitboxes();
     }
 
     public static DefaultAttributeContainer.Builder setAttributes() {
-        return AnimalEntity.createMobAttributes()
+        return FishEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 250.0)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.0f)
@@ -55,33 +62,30 @@ public class AzureReaperEntity extends FishEntity implements GeoEntity {
 
     @Override
     public void travel(Vec3d movementInput) {
-        if (this.isTouchingWater()) {
-            // Движение в воде, как у ванильных рыб
+        if (this.canMoveVoluntarily() && this.isTouchingWater()) {
             this.updateVelocity(0.01F, movementInput);
             this.move(MovementType.SELF, this.getVelocity());
-            this.setVelocity(this.getVelocity().multiply(0.9D));
+            this.setVelocity(this.getVelocity().multiply(0.9));
             if (this.getTarget() == null) {
-                this.setVelocity(this.getVelocity().add(0.0D, -0.005D, 0.0D)); // Небольшая гравитация в воде
+                this.setVelocity(this.getVelocity().add(0.0, -0.005, 0.0));
             }
         } else {
-            // Движение на суше
             super.travel(movementInput);
         }
     }
 
     @Override
-    public void tick() {
-        super.tick();
-
-        // Логика атаки
-        if (attackCooldown > 0) {
-            attackCooldown--;
+    public void tickMovement() {
+        if (!this.isTouchingWater() && this.isOnGround() && this.verticalCollision) {
+            this.setVelocity(this.getVelocity().add((double) ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4000000059604645, (double) ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
+            this.setOnGround(false);
+            this.velocityDirty = true;
+            this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getSoundPitch());
         }
 
-        if (this.getTarget() != null && attackCooldown <= 0) {
-            this.tryAttack(this.getTarget());
-            attackCooldown = 20; // 1 секунда кулдауна
-        }
+        super.tickMovement();
+        // Обновляем хитбоксы каждый тик
+        updateHitboxes();
     }
 
     @Override
@@ -128,5 +132,59 @@ public class AzureReaperEntity extends FishEntity implements GeoEntity {
 
     private boolean isRoaring() {
         return this.getTarget() != null && this.distanceTo(this.getTarget()) < 10.0;
+    }
+
+    // Метод для обновления хитбоксов
+    private void updateHitboxes() {
+        Vec3d pos = this.getPos(); // Получаем текущую позицию сущности
+
+        // Обновляем хитбоксы на основе текущей позиции
+        this.bodyHitbox = createBodyHitbox(pos);
+        this.headHitbox = createHeadHitbox(pos);
+        this.tailHitbox = createTailHitbox(pos);
+    }
+
+    // Методы для создания хитбоксов
+    private Box createBodyHitbox(Vec3d pos) {
+        float width = 9.0F;  // Ширина тела
+        float height = 9.0F; // Высота тела
+        float depth = 19.0F; // Глубина тела
+        return new Box(
+            pos.x - width / 2, pos.y - height / 2, pos.z - depth / 2,
+            pos.x + width / 2, pos.y + height / 2, pos.z + depth / 2
+        );
+    }
+
+    private Box createHeadHitbox(Vec3d pos) {
+        float width = 7.0F;  // Ширина головы
+        float height = 6.0F; // Высота головы
+        float depth = 7.0F;  // Глубина головы
+        return new Box(
+            pos.x - width / 2, pos.y - height / 2, pos.z - depth / 2 - 8.0F, // Смещение головы вперед
+            pos.x + width / 2, pos.y + height / 2, pos.z + depth / 2 - 8.0F
+        );
+    }
+
+    private Box createTailHitbox(Vec3d pos) {
+        float width = 8.0F;  // Ширина хвоста
+        float height = 8.0F; // Высота хвоста
+        float depth = 16.0F; // Глубина хвоста
+        return new Box(
+            pos.x - width / 2, pos.y - height / 2, pos.z - depth / 2 + 11.0F, // Смещение хвоста назад
+            pos.x + width / 2, pos.y + height / 2, pos.z + depth / 2 + 11.0F
+        );
+    }
+
+    // Методы для получения хитбоксов
+    public Box getBodyHitbox() {
+        return bodyHitbox;
+    }
+
+    public Box getHeadHitbox() {
+        return headHitbox;
+    }
+
+    public Box getTailHitbox() {
+        return tailHitbox;
     }
 }
