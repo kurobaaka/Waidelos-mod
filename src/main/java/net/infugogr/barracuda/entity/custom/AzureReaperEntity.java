@@ -1,7 +1,5 @@
 package net.infugogr.barracuda.entity.custom;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MovementType;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
@@ -11,13 +9,12 @@ import net.minecraft.entity.ai.goal.SwimAroundGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.FishEntity;
-import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
@@ -31,7 +28,7 @@ import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInst
 
 public class AzureReaperEntity extends FishEntity implements GeoEntity {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private int attackCooldown = 0; // New field to track attack cooldown
+    private int attackCooldown = 0;
 
     public AzureReaperEntity(EntityType<? extends FishEntity> entityType, World world) {
         super(entityType, world);
@@ -42,42 +39,32 @@ public class AzureReaperEntity extends FishEntity implements GeoEntity {
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 250.0)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.0f)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 5.0);
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2);
     }
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(1, new SwimAroundGoal(this, 1.2D, 60)); // Active swimming
-        this.goalSelector.add(2, new MeleeAttackGoal(this, 5.0D, false)); // Attacking prey
-        this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0D, 10)); // Wandering in search of prey
-        this.goalSelector.add(4, new LookAroundGoal(this)); // Looking around
+        this.goalSelector.add(1, new SwimAroundGoal(this, 1.0D, 40)); // Параметры как у ванильных рыб
+        this.goalSelector.add(2, new MeleeAttackGoal(this, 1.5D, false)); // Атака
+        this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0D, 10)); // Блуждание
+        this.goalSelector.add(4, new LookAroundGoal(this)); // Осматривание
 
-        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true)); // Attack player
-        this.targetSelector.add(2, new ActiveTargetGoal<>(this, FishEntity.class, true)); // Attack other fish
-        this.targetSelector.add(3, new ActiveTargetGoal<>(this, SquidEntity.class, true)); // Attack squids
-        this.targetSelector.add(4, new ActiveTargetGoal<>(this, VillagerEntity.class, true)); // Attack villagers in water
-    }
-
-    @Override
-    public void tickMovement() {
-        super.tickMovement();
-        if (!this.isTouchingWater()) {
-            this.setVelocity(this.getVelocity().add(0.0D, -0.05D, 0.0D)); // Falling on land
-        }
-    }
-
-    @Override
-    public EntityGroup getGroup() {
-        return EntityGroup.AQUATIC; // Belongs to aquatic group
+        this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true)); // Атака игрока
+        this.targetSelector.add(4, new ActiveTargetGoal<>(this, VillagerEntity.class, true)); // Атака деревенских жителей
     }
 
     @Override
     public void travel(Vec3d movementInput) {
         if (this.isTouchingWater()) {
-            this.updateVelocity(0.01F, movementInput); // Update speed in water
-            this.move(MovementType.SELF, this.getVelocity()); // Apply movement
-            this.setVelocity(this.getVelocity().multiply(0.9D)); // Slow down movement
+            // Движение в воде, как у ванильных рыб
+            this.updateVelocity(0.01F, movementInput);
+            this.move(MovementType.SELF, this.getVelocity());
+            this.setVelocity(this.getVelocity().multiply(0.9D));
+            if (this.getTarget() == null) {
+                this.setVelocity(this.getVelocity().add(0.0D, -0.005D, 0.0D)); // Небольшая гравитация в воде
+            }
         } else {
+            // Движение на суше
             super.travel(movementInput);
         }
     }
@@ -86,12 +73,14 @@ public class AzureReaperEntity extends FishEntity implements GeoEntity {
     public void tick() {
         super.tick();
 
-        if (!this.isTouchingWater()) {
-            this.setVelocity(this.getVelocity().add(0.0D, -0.05D, 0.0D)); // Falling on land
-        }
-
+        // Логика атаки
         if (attackCooldown > 0) {
             attackCooldown--;
+        }
+
+        if (this.getTarget() != null && attackCooldown <= 0) {
+            this.tryAttack(this.getTarget());
+            attackCooldown = 20; // 1 секунда кулдауна
         }
     }
 
@@ -109,8 +98,8 @@ public class AzureReaperEntity extends FishEntity implements GeoEntity {
         } else if (this.isRoaring()) {
             tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.azure_reaper.roar", Animation.LoopType.PLAY_ONCE));
             return PlayState.CONTINUE;
-        } else if (velocity > 0.01 && this.isTouchingWater()) {
-            if (velocity > 0.1) { // Adjust threshold for fast swim
+        } else if (this.isTouchingWater()) {
+            if (velocity > 0.1) {
                 tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.azure_reaper.fast_swim", Animation.LoopType.LOOP));
             } else {
                 tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.azure_reaper.swim", Animation.LoopType.LOOP));
@@ -129,18 +118,15 @@ public class AzureReaperEntity extends FishEntity implements GeoEntity {
 
     @Override
     public ItemStack getBucketItem() {
-        throw new UnsupportedOperationException("Unimplemented method 'getBucketItem'");
+        return new ItemStack(Items.WATER_BUCKET); // Замените на ваш предмет
     }
-    
+
     @Override
     protected SoundEvent getFlopSound() {
         return SoundEvents.ENTITY_COD_FLOP;
     }
 
     private boolean isRoaring() {
-        // Implement logic to determine if the entity is roaring
-        // This could be a custom behavior or triggered by certain events
-        return false; // Placeholder, replace with actual logic
+        return this.getTarget() != null && this.distanceTo(this.getTarget()) < 10.0;
     }
-
 }
