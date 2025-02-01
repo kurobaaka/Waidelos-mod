@@ -247,13 +247,6 @@ public class ModItems {
     public static final Item COOKED_FISH_STURGEON = registerItem("cooked_fish_sturgeon", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_STURGEON)));
     public static final Item COOKED_FISH_TUNA = registerItem("cooked_fish_tuna", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_TUNA)));
     public static final Item COOKED_FISH_SQUID = registerItem("cooked_fish_squid", new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_FISH_SQUID)));
-//     public static final Item WWW = registerItem("www", new Item(new FabricItemSettings().food(ModFoodComponents.WWW)));
-//     public static final Item WWW = registerItem("www", new Item(new FabricItemSettings().food(ModFoodComponents.WWW)));
-//     public static final Item WWW = registerItem("www", new Item(new FabricItemSettings().food(ModFoodComponents.WWW)));
-//     public static final Item WWW = registerItem("www", new Item(new FabricItemSettings().food(ModFoodComponents.WWW)));
-//     public static final Item WWW = registerItem("www", new Item(new FabricItemSettings().food(ModFoodComponents.WWW)));
-//     public static final Item WWW = registerItem("www", new Item(new FabricItemSettings().food(ModFoodComponents.WWW)));
-
 
     public static final IronPlate IRON_PLATE = register("iron_plate",
             IronPlate::new, settings -> settings.maxCount(16));

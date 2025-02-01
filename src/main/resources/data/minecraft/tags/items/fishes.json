@@ -1,0 +1,28 @@
+{
+    "replace": false,
+    "values": [
+      "barracuda:fish_eel",
+      "barracuda:fish_bluefish",
+      "barracuda:fish_bream",
+      "barracuda:fish_tilapia",
+      "barracuda:fish_flounder",
+      "barracuda:fish_glass_catfish",
+      "barracuda:fish_dolphinfish",
+      "barracuda:fish_pike",
+      "barracuda:fish_herring",
+      "barracuda:fish_carp",
+      "barracuda:fish_catfish",
+      "barracuda:fish_short_cod",
+      "barracuda:fish_salmon",
+      "barracuda:fish_octopus",
+      "barracuda:fish_sandfish",
+      "barracuda:fish_anchovy",
+      "barracuda:fish_sardine",
+      "barracuda:fish_black_sea_bass",
+      "barracuda:fish_sea_cucumber",
+      "barracuda:fish_rockfish",
+      "barracuda:fish_sturgeon",
+      "barracuda:fish_tuna",
+      "barracuda:fish_squid"
+    ]
+  }

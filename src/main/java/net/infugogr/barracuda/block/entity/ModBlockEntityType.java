@@ -33,6 +33,10 @@ public class ModBlockEntityType {
             BlockEntityType.Builder.create(TeleporterBlockEntity::new, ModBlocks.TELEPORTER)
                     .build());
 
+    public static final BlockEntityType<FuelGeneratorBlockEntity> FISHING_NET = register("fishing_net",
+            BlockEntityType.Builder.create(FuelGeneratorBlockEntity::new, ModBlocks.FISHING_NET)
+                    .build());
+                    
     public static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType<T> type) {
         return Registry.register(Registries.BLOCK_ENTITY_TYPE, Barracuda.id(name), type);
     }

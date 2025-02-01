@@ -45,6 +45,8 @@ public class ModBlocks {
             new HVcableBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     public static final Block WALL_BLOCK = registerWithItemCopy("wall_block",
             new WallBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
+    public static final Block FISHING_NET = registerWithItemCopy("fishing_net",
+            new FishingNetBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     
 
     private static Block registerWithItemCopy(String name, Block block) {
