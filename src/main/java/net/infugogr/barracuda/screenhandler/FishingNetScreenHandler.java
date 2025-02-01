@@ -32,7 +32,7 @@ public class FishingNetScreenHandler extends ScreenHandler {
 
     public FishingNetScreenHandler(int syncId, PlayerInventory playerInventory,
                                       BlockEntity blockEntity, PropertyDelegate arrayPropertyDelegate) {
-        super(ModScreenHandlerType.FUEL_GENERATOR, syncId);
+        super(ModScreenHandlerType.FISHING_NET, syncId);
 
         this.propertyDelegate = arrayPropertyDelegate;
         this.blockEntity = ((FishingNetBlockEntity) blockEntity);
@@ -95,7 +95,7 @@ public class FishingNetScreenHandler extends ScreenHandler {
 
     @Override
     public boolean canUse(PlayerEntity player) {
-        return canUse(player, ModBlocks.FUEL_GENERATOR);
+        return canUse(player, ModBlocks.FISHING_NET);
     }
 
     private boolean canUse(PlayerEntity player, Block... blocks) {
