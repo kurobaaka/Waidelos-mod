@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "barracuda:block/fishing_net", "uvlock": false },
+    "facing=east":  { "model": "barracuda:block/fishing_net", "y":  90, "uvlock": false },
+    "facing=south": { "model": "barracuda:block/fishing_net", "y": 180, "uvlock": false },
+    "facing=west":  { "model": "barracuda:block/fishing_net", "y": 270, "uvlock": false }
+  }
+}
