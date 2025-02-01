@@ -12,6 +12,10 @@ public class ModScreenHandlerType {
             Registry.register(Registries.SCREEN_HANDLER, Barracuda.id("fuel_generator"),
                     new ExtendedScreenHandlerType<>(FuelGeneratorScreenHandler::new));
 
+    public static final ScreenHandlerType<FishingNetScreenHandler> FISHING_NET =
+            Registry.register(Registries.SCREEN_HANDLER, Barracuda.id("fishing_net"),
+                    new ExtendedScreenHandlerType<>(FishingNetScreenHandler::new));
+
     public static final ScreenHandlerType<SMESScreenHandler> SMES =
             Registry.register(Registries.SCREEN_HANDLER, Barracuda.id("smes"),
                     new ExtendedScreenHandlerType<>(SMESScreenHandler::new));
