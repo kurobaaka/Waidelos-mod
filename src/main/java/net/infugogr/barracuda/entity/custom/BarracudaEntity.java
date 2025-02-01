@@ -7,10 +7,10 @@ import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.SwimAroundGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.FishEntity;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.passive.VillagerEntity;
@@ -35,12 +35,13 @@ import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInst
 public class BarracudaEntity extends FishEntity implements GeoEntity {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
-    public BarracudaEntity(EntityType<? extends FishEntity> entityType, World world) {
+    public BarracudaEntity(EntityType<? extends BarracudaEntity> entityType, World world) {
         super(entityType, world);
+        this.setNoGravity(true); // Отключаем гравитацию
     }
 
  public static DefaultAttributeContainer.Builder setAttributes() {
-        return AnimalEntity.createMobAttributes()
+        return FishEntity.createMobAttributes()
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 20.0)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 2.0f)
@@ -52,7 +53,7 @@ protected void initGoals() {
     // Основные цели для плавания и охоты
     this.goalSelector.add(1, new SwimAroundGoal(this, 1.2D, 10)); // Активное плавание
     this.goalSelector.add(2, new MeleeAttackGoal(this, 1.5D, false)); // Атака добычи
-    this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0D, 10)); // Блуждание в поисках добычи
+    // this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0D, 10)); // Блуждание в поисках добычи
     this.goalSelector.add(4, new LookAroundGoal(this)); // Осматриваться
 
     // Цели для выбора добычи
@@ -65,6 +66,9 @@ protected void initGoals() {
     @Override
     public void tickMovement() {
         super.tickMovement();
+        if (this.isTouchingWater()) {
+            this.setVelocity(this.getVelocity().add(0, -0.01, 0)); // Медленно опускаем моба в воде
+        }
         if (!this.isTouchingWater()) {
             this.setVelocity(this.getVelocity().add(0.0D, -0.05D, 0.0D)); // Падение на земле
         }
@@ -77,22 +81,23 @@ protected void initGoals() {
     
     @Override
     public void travel(Vec3d movementInput) {
-    if (this.isTouchingWater()) {
-        this.updateVelocity(0.01F, movementInput); // Обновляем скорость в воде
-        this.move(MovementType.SELF, this.getVelocity()); // Применяем движение
-        this.setVelocity(this.getVelocity().multiply(0.9D)); // Замедляем движение
-    } else {
-        super.travel(movementInput);
+        if (this.isTouchingWater()) {
+            // Управляем движением в воде
+            this.updateVelocity(0.01f, movementInput);
+            this.move(MovementType.SELF, this.getVelocity());
+            this.setVelocity(this.getVelocity().multiply(0.9)); // Замедляем движение
+        } else {
+            super.travel(movementInput);
+        }
     }
-}
 
     
     @Override
     public void tick() {
         super.tick();
-    
-        if (!this.isTouchingWater()) {
-            this.setVelocity(this.getVelocity().add(0.0D, -0.05D, 0.0D)); // Падение на земле
+        if (this.isTouchingWater()) {
+            // Управляем движением в воде
+            this.setVelocity(this.getVelocity().x, -0.02, this.getVelocity().z); // Опускаем рыбу в воде
         }
     }
 

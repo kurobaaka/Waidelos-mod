@@ -28,15 +28,15 @@ import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInst
 
 public class AzureReaperEntity extends FishEntity implements GeoEntity {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    private int attackCooldown = 0;
 
     // Хитбоксы для тела, головы и хвоста
     private Box bodyHitbox;
     private Box headHitbox;
     private Box tailHitbox;
 
-    public AzureReaperEntity(EntityType<? extends FishEntity> entityType, World world) {
+    public AzureReaperEntity(EntityType<? extends AzureReaperEntity> entityType, World world) {
         super(entityType, world);
+        this.setNoGravity(true); // Отключаем гравитацию
         // Инициализация хитбоксов
         updateHitboxes();
     }
@@ -46,29 +46,28 @@ public class AzureReaperEntity extends FishEntity implements GeoEntity {
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 250.0)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5.0)
                 .add(EntityAttributes.GENERIC_ATTACK_SPEED, 1.0f)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.2);
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 5.0);
     }
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(1, new SwimAroundGoal(this, 1.0D, 40)); // Параметры как у ванильных рыб
+        this.goalSelector.add(1, new SwimAroundGoal(this, 1.0D, 10)); // Параметры как у ванильных рыб
         this.goalSelector.add(2, new MeleeAttackGoal(this, 1.5D, false)); // Атака
-        this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0D, 10)); // Блуждание
+        // this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0D, 10)); // Блуждание
         this.goalSelector.add(4, new LookAroundGoal(this)); // Осматривание
 
         this.targetSelector.add(1, new ActiveTargetGoal<>(this, PlayerEntity.class, true)); // Атака игрока
         this.targetSelector.add(4, new ActiveTargetGoal<>(this, VillagerEntity.class, true)); // Атака деревенских жителей
     }
 
+    
     @Override
     public void travel(Vec3d movementInput) {
-        if (this.canMoveVoluntarily() && this.isTouchingWater()) {
-            this.updateVelocity(0.01F, movementInput);
+        if (this.isTouchingWater()) {
+            // Управляем движением в воде
+            this.updateVelocity(0.01f, movementInput);
             this.move(MovementType.SELF, this.getVelocity());
-            this.setVelocity(this.getVelocity().multiply(0.9));
-            if (this.getTarget() == null) {
-                this.setVelocity(this.getVelocity().add(0.0, -0.005, 0.0));
-            }
+            this.setVelocity(this.getVelocity().multiply(0.9)); // Замедляем движение
         } else {
             super.travel(movementInput);
         }
@@ -76,13 +75,13 @@ public class AzureReaperEntity extends FishEntity implements GeoEntity {
 
     @Override
     public void tickMovement() {
-        if (!this.isTouchingWater() && this.isOnGround() && this.verticalCollision) {
-            this.setVelocity(this.getVelocity().add((double) ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4000000059604645, (double) ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
-            this.setOnGround(false);
-            this.velocityDirty = true;
-            this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getSoundPitch());
+        super.tickMovement();
+        if (this.isTouchingWater()) {
+            this.setVelocity(this.getVelocity().add(0, -0.01, 0)); // Медленно опускаем моба в воде
         }
-
+        if (!this.isTouchingWater()) {
+            this.setVelocity(this.getVelocity().add(0.0D, -0.05D, 0.0D)); // Падение на земле
+        }
         super.tickMovement();
         // Обновляем хитбоксы каждый тик
         updateHitboxes();
