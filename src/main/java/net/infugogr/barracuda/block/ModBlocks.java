@@ -3,14 +3,34 @@ package net.infugogr.barracuda.block;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.infugogr.barracuda.Barracuda;
+import net.infugogr.barracuda.block.crates.BasicCrateBlock;
+import net.infugogr.barracuda.block.crates.MobCrateBlock;
+import net.infugogr.barracuda.block.crates.PlantsCrateBlock;
+import net.infugogr.barracuda.block.crates.RareResourceCrate;
+import net.infugogr.barracuda.block.crates.ResourceCrateBlock;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 
 public class ModBlocks {
+
+    // Crates
+    public static final Block BASIC_CRATE = registerWithItemCopy("basic_crate", 
+        new BasicCrateBlock(AbstractBlock.Settings.create().solid().sounds(BlockSoundGroup.WOOD).hardness(2.0f)));
+    public static final Block RESOURCE_CRATE = registerWithItemCopy("resource_crate", 
+        new ResourceCrateBlock(AbstractBlock.Settings.create().solid().sounds(BlockSoundGroup.METAL).hardness(2.0f)));
+    public static final Block PLANTS_CRATE = registerWithItemCopy("plants_crate", 
+        new PlantsCrateBlock(AbstractBlock.Settings.create().solid().sounds(BlockSoundGroup.AZALEA_LEAVES).hardness(.8f)));
+    public static final Block MOB_CRATE = registerWithItemCopy("mob_crate", 
+        new MobCrateBlock(AbstractBlock.Settings.create().solid().sounds(BlockSoundGroup.BONE).hardness(2.0f)));
+    public static final Block RARE_RESOURCE_CRATE = registerWithItemCopy("rare_resource_crate", 
+        new RareResourceCrate(AbstractBlock.Settings.create().solid().sounds(BlockSoundGroup.METAL).hardness(2.0f)));
+
     public static final Block AQUATIC_SAND = registerWithItemCopy("aquatic_sand",
             new AquaticSandBlock(FabricBlockSettings.copyOf(Blocks.SAND)));
     public static final Block MINERAL_BLOCK = registerWithItemCopy("mineral_block",

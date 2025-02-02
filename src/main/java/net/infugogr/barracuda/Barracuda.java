@@ -22,10 +22,13 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import team.reborn.energy.api.EnergyStorage;
+// import net.infugogr.barracuda.registers.*;
 
 public class Barracuda implements ModInitializer { 
 	public static final String MOD_ID = "barracuda";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+	// private static final ConfigRegister configReg = new ConfigRegister();
+   
 
 	public static Text containerTitle(String name) {
 		return Text.translatable("container." + MOD_ID + "." + name);
@@ -42,6 +45,8 @@ public class Barracuda implements ModInitializer {
 		ModScreenHandlerType.registerModScreenHandlerType();
 		ModBlockEntityType.registerModBlockEntityType();
 		ModSounds.registerSounds();
+		// configReg.load();
+		
 
 		// Item Lookup
 		EnergyStorage.SIDED.registerForBlockEntity(FuelGeneratorBlockEntity::getEnergyProvider, ModBlockEntityType.FUEL_GENERATOR);
@@ -73,6 +78,10 @@ public class Barracuda implements ModInitializer {
 
 		LOGGER.info("Loaded!");
 	}
+
+	// public static ConfigRegister getConfigRegister(){
+    //     return configReg;
+    // }
 
 	public static Identifier id(String path) {
 		return Identifier.of(MOD_ID, path);

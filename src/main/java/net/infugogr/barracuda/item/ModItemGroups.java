@@ -45,6 +45,11 @@ public class ModItemGroups {
                         entries.add(ModItems.SAPPHIRE_HOE);
                         entries.add(ModItems.SAPPHIRE_PICKAXE);
                         entries.add(ModItems.AQUATIC_SWORD);
+                        entries.add(ModBlocks.BASIC_CRATE);
+                        entries.add(ModBlocks.MOB_CRATE);
+                        entries.add(ModBlocks.PLANTS_CRATE);
+                        entries.add(ModBlocks.RARE_RESOURCE_CRATE);
+                        entries.add(ModBlocks.RESOURCE_CRATE);
                     }).build());
 
     public static final ItemGroup BARRACUDA_MOD_ITEMS_GROUP_2 = Registry.register(Registries.ITEM_GROUP,

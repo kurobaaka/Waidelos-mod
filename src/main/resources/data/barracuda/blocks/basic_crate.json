@@ -1,0 +1,45 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 3,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "minecraft:iron_ingot"
+        },
+        {
+          "type":"minecraft:item",
+          "weight": 2,
+          "name": "minecraft:gold_ingot"
+        },
+        {
+          "type":"minecraft:item",
+          "weight": 6,
+          "name": "minecraft:coal"
+        },
+        {
+          "type":"minecraft:item",
+          "weight": 8,
+          "name": "minecraft:salmon"
+        },
+        {
+          "type":"minecraft:item",
+          "weight": 8,
+          "name": "minecraft:cod"
+        },
+        {
+          "type":"minecraft:item",
+          "weight": 3,
+          "name": "minecraft:pufferfish"
+        },
+        {
+          "type":"minecraft:item",
+          "weight": 2,
+          "name": "minecraft:tropical_fish"
+        }
+      ]
+    }
+  ]
+}

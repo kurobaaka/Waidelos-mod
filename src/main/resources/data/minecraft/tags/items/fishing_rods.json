@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:fishing_rod",
+    "fishingrework:gold_fishing_rod",
+    "fishingrework:iron_fishing_rod",
+    "fishingrework:diamond_fishing_rod",
+    "fishingrework:netherite_fishing_rod"
+  ]
+}
