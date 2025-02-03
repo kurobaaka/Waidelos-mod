@@ -1,11 +1,13 @@
 package net.infugogr.barracuda.block.entity;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.infugogr.barracuda.Barracuda;
 import net.infugogr.barracuda.block.ModBlocks;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.util.Identifier;
 
 public class ModBlockEntityType {
     public static final BlockEntityType<FuelGeneratorBlockEntity> FUEL_GENERATOR = register("fuel_generator",
@@ -33,9 +35,10 @@ public class ModBlockEntityType {
             BlockEntityType.Builder.create(TeleporterBlockEntity::new, ModBlocks.TELEPORTER)
                     .build());
 
-//     public static final BlockEntityType<FuelGeneratorBlockEntity> FISHING_NET = register("fishing_net",
-//             BlockEntityType.Builder.create(FuelGeneratorBlockEntity::new, ModBlocks.FISHING_NET)
-//                     .build());
+    public static final BlockEntityType<FishingNetBlockEntity> FISHING_NET =
+            Registry.register(Registries.BLOCK_ENTITY_TYPE, new Identifier(Barracuda.MOD_ID, "fishing_net"),
+                    FabricBlockEntityTypeBuilder.create(FishingNetBlockEntity::new,
+                            ModBlocks.FISHING_NET).build());
                     
     public static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType<T> type) {
         return Registry.register(Registries.BLOCK_ENTITY_TYPE, Barracuda.id(name), type);
