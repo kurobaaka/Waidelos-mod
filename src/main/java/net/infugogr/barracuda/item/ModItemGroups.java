@@ -174,7 +174,7 @@ public class ModItemGroups {
                         entries.add(ModItems.DWARVEN_PICKAXE);
                         entries.add(ModItems.DWARVEN_AXE);
                         entries.add(ModItems.DWARVEN_SHOVEL);
-                        entries.add(ModBlocks.FISHING_NET);
+                        // entries.add(ModBlocks.FISHING_NET);
                      }).build());
                     
                      public static final ItemGroup BARRACUDA_MOD_ITEMS_GROUP_6 = Registry.register(Registries.ITEM_GROUP,
