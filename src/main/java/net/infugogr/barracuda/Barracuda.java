@@ -64,9 +64,6 @@ public class Barracuda implements ModInitializer {
 
 		EnergyStorage.SIDED.registerForBlockEntity(HVcableBlockEntity::getEnergyProvider, ModBlockEntityType.HVCABLE);
 
-		// BlockEntityRendererFactories.register(ModBlockEntityType.FUEL_GENERATOR, FuelGeneratorBlockEntityRenderer::new);
-		// BlockEntityRendererFactories.register(ModBlockEntityType.SMES, SMESBlockEntityRenderer::new);
-
 		FabricDefaultAttributeRegistry.register(ModEntities.PORCUPINE, PorcupineEntity.createPorcupineAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.BASS_FISH, BassFishEntity.createBassFishAttributes());
 		FabricDefaultAttributeRegistry.register(ModEntities.AZURE_SERPENT, AzureSerpentEntity.createAzureSerpentAttributes());

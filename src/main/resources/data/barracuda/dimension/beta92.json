@@ -1,5 +1,5 @@
 {
-  "type": "barracuda:kaupendium_type",
+  "type": "barracuda:beta92_type",
   "generator": {
     "type": "minecraft:noise",
     "settings": "barracuda:beta",
