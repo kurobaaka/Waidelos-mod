@@ -1,7 +1,6 @@
 package net.infugogr.barracuda.block;
 
 import net.infugogr.barracuda.block.entity.FishingNetBlockEntity;
-import net.infugogr.barracuda.block.ModBlocks;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
@@ -17,25 +16,8 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import com.mojang.serialization.MapCodec;
-import net.infugogr.barracuda.block.entity.FuelGeneratorBlockEntity;
-import net.infugogr.barracuda.block.entity.ModBlockEntityType;
-import net.infugogr.barracuda.screenhandler.FuelGeneratorScreenHandler;
 import net.infugogr.barracuda.util.TickableBlockEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.function.BooleanBiFunction;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.shape.VoxelShapes;
 
-import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
 public class FishingNetBlock extends BlockWithEntity implements BlockEntityProvider {
@@ -90,12 +72,10 @@ public class FishingNetBlock extends BlockWithEntity implements BlockEntityProvi
 
         return ActionResult.SUCCESS;
     }
-
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return validateTicker(type, ModBlocks.FISHING_NET,
-                (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
+        return TickableBlockEntity.createTicker(world);
     }
 }
 
@@ -105,7 +85,6 @@ public class FishingNetBlock extends BlockWithEntity implements BlockEntityProvi
     //     return validateTicker(type, ModBlocks.FISHING_NET,
     //             (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
     // }
-}
 
 // package net.infugogr.barracuda.block;
 
