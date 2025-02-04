@@ -13,6 +13,7 @@ import net.infugogr.barracuda.entity.client.BassFishModel;
 import net.infugogr.barracuda.entity.client.BassFishRenderer;
 import net.infugogr.barracuda.entity.client.BarracudaRenderer;
 import net.infugogr.barracuda.entity.client.AzureReaperRenderer;
+import net.infugogr.barracuda.screenhandler.FishingNetScreen;
 import net.infugogr.barracuda.screenhandler.FuelGeneratorScreen;
 import net.infugogr.barracuda.screenhandler.ModScreenHandlerType;
 import net.infugogr.barracuda.screenhandler.SMESScreen;
@@ -26,6 +27,7 @@ public class BarracudaClient implements ClientModInitializer {
         // Registering Screens
         HandledScreens.register(ModScreenHandlerType.FUEL_GENERATOR, FuelGeneratorScreen::new);
         HandledScreens.register(ModScreenHandlerType.SMES, SMESScreen::new);
+        HandledScreens.register(ModScreenHandlerType.FISHING_NET, FishingNetScreen::new);
 
         EntityRendererRegistry.register(ModEntities.PORCUPINE, PorcupineRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(ModModelLayers.PORCUPINE, PorcupineModel::getTexturedModelData);
