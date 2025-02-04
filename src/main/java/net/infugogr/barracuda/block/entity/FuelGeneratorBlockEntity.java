@@ -175,10 +175,6 @@ public class FuelGeneratorBlockEntity extends UpdatableBlockEntity implements Sy
         return this.inventoryStorage.getStorage(direction);
     }
 
-    public ItemStack getRenderStack() {
-        return Objects.requireNonNull(this.inventoryStorage.getInventory(0)).getStack(0);
-    }
-
     @Nullable
     @Override
     public Packet<ClientPlayPacketListener> toUpdatePacket() {

@@ -3,15 +3,23 @@ package net.infugogr.barracuda.block.entity;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.infugogr.barracuda.item.ModItems;
 import net.infugogr.barracuda.screenhandler.FishingNetScreenHandler;
+import net.infugogr.barracuda.util.SyncableStorage;
+import net.infugogr.barracuda.util.SyncableTickableBlockEntity;
+import net.infugogr.barracuda.util.UpdatableBlockEntity;
+import net.infugogr.barracuda.util.energy.SyncingEnergyStorage;
+import net.infugogr.barracuda.util.inventory.SyncingSimpleInventory;
+import net.infugogr.barracuda.util.inventory.WrappedInventoryStorage;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -22,11 +30,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
-public class FishingNetBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory, ImplementedInventory {
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(2, ItemStack.EMPTY);
+import java.util.List;
 
-    private static final int INPUT_SLOT = 0;
-    private static final int OUTPUT_SLOT = 1;
+public class FishingNetBlockEntity extends UpdatableBlockEntity implements SyncableTickableBlockEntity, ExtendedScreenHandlerFactory{
+    private final WrappedInventoryStorage<SimpleInventory> inventoryStorage = new WrappedInventoryStorage<>();
 
     protected final PropertyDelegate propertyDelegate;
     private int progress = 0;
@@ -34,6 +41,7 @@ public class FishingNetBlockEntity extends BlockEntity implements ExtendedScreen
 
     public FishingNetBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntityType.FISHING_NET, pos, state);
+        this.inventoryStorage.addInventory(new SyncingSimpleInventory(this, 1));
         this.propertyDelegate = new PropertyDelegate() {
             @Override
             public int get(int index) {
@@ -60,6 +68,18 @@ public class FishingNetBlockEntity extends BlockEntity implements ExtendedScreen
     }
 
     @Override
+    public List<SyncableStorage> getSyncableStorages() {
+        var inventory = (SyncingSimpleInventory) this.inventoryStorage.getInventory(0);
+        assert inventory != null;
+        return List.of(inventory);
+    }
+
+    @Override
+    public void onTick() {
+
+    }
+
+    @Override
     public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
         buf.writeBlockPos(this.pos);
     }
@@ -70,23 +90,19 @@ public class FishingNetBlockEntity extends BlockEntity implements ExtendedScreen
     }
 
     @Override
-    public DefaultedList<ItemStack> getItems() {
-        return inventory;
-    }
-
-    @Override
-    protected void writeNbt(NbtCompound nbt) {
-        super.writeNbt(nbt);
-        Inventories.writeNbt(nbt, inventory);
-        nbt.putInt("gem_polishing_station.progress", progress);
+    public void writeNbt(NbtCompound nbt) {
+        nbt.put("Inventory", this.inventoryStorage.writeNbt());
+        nbt.putInt("BurnTime", this.progress);
+        nbt.putInt("FuelTime", this.maxProgress);
     }
 
     @Override
     public void readNbt(NbtCompound nbt) {
-        super.readNbt(nbt);
-        Inventories.readNbt(nbt, inventory);
-        progress = nbt.getInt("gem_polishing_station.progress");
+        this.inventoryStorage.readNbt(nbt.getList("Inventory", NbtElement.COMPOUND_TYPE));
+        this.progress = nbt.getInt("BurnTime");
+        this.maxProgress = nbt.getInt("FuelTime");
     }
+
 
     @Nullable
     @Override
@@ -94,64 +110,11 @@ public class FishingNetBlockEntity extends BlockEntity implements ExtendedScreen
         return new FishingNetScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
 
-    public void tick(World world, BlockPos pos, BlockState state) {
-        if(world.isClient()) {
-            return;
-        }
-
-        if(isOutputSlotEmptyOrReceivable()) {
-            if(this.hasRecipe()) {
-                this.increaseCraftProgress();
-                markDirty(world, pos, state);
-
-                if(hasCraftingFinished()) {
-                    this.craftItem();
-                    this.resetProgress();
-                }
-            } else {
-                this.resetProgress();
-            }
-        } else {
-            this.resetProgress();
-            markDirty(world, pos, state);
-        }
+    public WrappedInventoryStorage<SimpleInventory> getWrappedInventoryStorage() {
+        return this.inventoryStorage;
     }
 
-    private void resetProgress() {
-        this.progress = 0;
-    }
-
-    private void craftItem() {
-        this.removeStack(INPUT_SLOT, 1);
-        ItemStack result = new ItemStack(ModItems.RUBY);
-
-        this.setStack(OUTPUT_SLOT, new ItemStack(result.getItem(), getStack(OUTPUT_SLOT).getCount() + result.getCount()));
-    }
-
-    private boolean hasCraftingFinished() {
-        return progress >= maxProgress;
-    }
-
-    private void increaseCraftProgress() {
-        progress++;
-    }
-
-    private boolean hasRecipe() {
-        ItemStack result = new ItemStack(ModItems.RUBY);
-        boolean hasInput = getStack(INPUT_SLOT).getItem() == ModItems.RUBY_DUST;
-
-        return hasInput && canInsertAmountIntoOutputSlot(result) && canInsertItemIntoOutputSlot(result.getItem());
-    }
-
-    private boolean canInsertItemIntoOutputSlot(Item item) {
-        return this.getStack(OUTPUT_SLOT).getItem() == item || this.getStack(OUTPUT_SLOT).isEmpty();
-    }
-
-    private boolean canInsertAmountIntoOutputSlot(ItemStack result) {
-        return this.getStack(OUTPUT_SLOT).getCount() + result.getCount() <= getStack(OUTPUT_SLOT).getMaxCount();
-    }
-
-    private boolean isOutputSlotEmptyOrReceivable() {
-        return this.getStack(OUTPUT_SLOT).isEmpty() || this.getStack(OUTPUT_SLOT).getCount() < this.getStack(OUTPUT_SLOT).getMaxCount();
+    public boolean isValid(ItemStack itemStack, int slot) {
+        return slot == 0;
     }
 }
