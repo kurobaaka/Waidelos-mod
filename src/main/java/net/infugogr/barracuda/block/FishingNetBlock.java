@@ -38,7 +38,7 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.WorldAccess;
 import org.jetbrains.annotations.Nullable;
 
-public class FishingNetBlock extends BlockWithEntity implements BlockEntityProvider, Waterloggable {
+public class FishingNetBlock extends BlockWithEntity implements BlockEntityProvider {
     private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 12, 16);
 
     public FishingNetBlock(Settings settings) {
@@ -90,6 +90,14 @@ public class FishingNetBlock extends BlockWithEntity implements BlockEntityProvi
 
         return ActionResult.SUCCESS;
     }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return validateTicker(type, ModBlocks.FISHING_NET,
+                (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
+    }
+}
 
     // @Nullable
     // @Override
