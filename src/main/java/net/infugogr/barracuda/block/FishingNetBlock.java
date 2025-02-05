@@ -5,8 +5,15 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
@@ -17,7 +24,7 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import com.mojang.serialization.MapCodec;
 import net.infugogr.barracuda.util.TickableBlockEntity;
-
+import net.minecraft.state.property.Properties;
 import org.jetbrains.annotations.Nullable;
 
 public class FishingNetBlock extends BlockWithEntity implements BlockEntityProvider {
@@ -27,6 +34,16 @@ public class FishingNetBlock extends BlockWithEntity implements BlockEntityProvi
 
     public FishingNetBlock(Settings settings) {
         super(settings);
+    }
+
+     @Override
+    public FluidState getFluidState(BlockState state) {
+        return Fluids.WATER.getDefaultState();
+    }
+
+    @Override
+    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
+        return type == NavigationType.WATER;
     }
 
     @Override

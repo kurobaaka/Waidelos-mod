@@ -49,7 +49,7 @@ public class FishingNetScreenHandler extends ScreenHandler {
 
 
     private void addBlockEntityInventory() {
-        addSlot(new PredicateSlot( this.blockEntity.getWrappedInventoryStorage().getInventory(0), 0, 8, 28,
+        addSlot(new PredicateSlot( this.blockEntity.getWrappedInventoryStorage().getInventory(0), 0, 8, 14,
                 itemStack -> this.blockEntity.isValid(itemStack, 0)));
     }
 

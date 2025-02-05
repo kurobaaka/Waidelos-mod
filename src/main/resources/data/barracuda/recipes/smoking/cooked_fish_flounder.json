@@ -1,9 +1,9 @@
 {
     "type": "minecraft:smoking",
     "ingredient": {
-      "item": "barracuda:fish_squid"
+      "item": "barracuda:fish_flounder"
     },
-    "result": "barracuda:cooked_fish_squid",
+    "result": "barracuda:cooked_fish_flounder",
     "experience": 0.7,
     "cookingtime": 300
   }
