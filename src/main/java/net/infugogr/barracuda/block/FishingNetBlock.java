@@ -1,109 +1,120 @@
-package net.infugogr.barracuda.block;
+package net.infugogr.barracuda.block.entity;
 
-import net.infugogr.barracuda.block.entity.FishingNetBlockEntity;
-import net.minecraft.block.*;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.infugogr.barracuda.item.ModItems;
+import net.infugogr.barracuda.screenhandler.FishingNetScreenHandler;
+import net.infugogr.barracuda.util.SyncableStorage;
+import net.infugogr.barracuda.util.SyncableTickableBlockEntity;
+import net.infugogr.barracuda.util.UpdatableBlockEntity;
+import net.infugogr.barracuda.util.energy.SyncingEnergyStorage;
+import net.infugogr.barracuda.util.inventory.SyncingSimpleInventory;
+import net.infugogr.barracuda.util.inventory.WrappedInventoryStorage;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.screen.NamedScreenHandlerFactory;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.DirectionProperty;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ItemScatterer;
-import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.screen.PropertyDelegate;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import com.mojang.serialization.MapCodec;
-import net.infugogr.barracuda.util.TickableBlockEntity;
-import net.minecraft.state.property.Properties;
 import org.jetbrains.annotations.Nullable;
 
-public class FishingNetBlock extends BlockWithEntity implements BlockEntityProvider {
-    private static final MapCodec<FishingNetBlock> CODEC = createCodec(FishingNetBlock::new);
-    public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
-    private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 12, 16);
+import java.util.List;
 
-    public FishingNetBlock(Settings settings) {
-        super(settings);
-    }
+public class FishingNetBlockEntity extends UpdatableBlockEntity implements SyncableTickableBlockEntity, ExtendedScreenHandlerFactory{
+    private final WrappedInventoryStorage<SimpleInventory> inventoryStorage = new WrappedInventoryStorage<>();
 
-     @Override
-    public FluidState getFluidState(BlockState state) {
-        return Fluids.WATER.getDefaultState();
-    }
+    protected final PropertyDelegate propertyDelegate;
+    private int progress = 0;
+    private int maxProgress = 72;
 
-    @Override
-    public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
-        return type == NavigationType.WATER;
-    }
-
-    @Override
-    protected MapCodec<? extends BlockWithEntity> getCodec() {
-        return CODEC;
-    }
-
-    @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return SHAPE;
-    }
-
-    @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
-    }
-
-    @Nullable
-    @Override
-    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new FishingNetBlockEntity(pos, state);
-    }
-
-    @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (state.getBlock() != newState.getBlock()) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof FishingNetBlockEntity) {
-                ItemScatterer.spawn(world, pos, (Inventory) blockEntity);
-                world.updateComparators(pos,this);
+    public FishingNetBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlockEntityType.FISHING_NET, pos, state);
+        this.inventoryStorage.addInventory(new SyncingSimpleInventory(this, 1));
+        this.propertyDelegate = new PropertyDelegate() {
+            @Override
+            public int get(int index) {
+                return switch (index) {
+                    case 0 -> FishingNetBlockEntity.this.progress;
+                    case 1 -> FishingNetBlockEntity.this.maxProgress;
+                    default -> 0;
+                };
             }
-            super.onStateReplaced(state, world, pos, newState, moved);
-        }
-    }
 
-    @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!world.isClient) {
-            NamedScreenHandlerFactory screenHandlerFactory = ((FishingNetBlockEntity) world.getBlockEntity(pos));
-
-            if (screenHandlerFactory != null) {
-                player.openHandledScreen(screenHandlerFactory);
+            @Override
+            public void set(int index, int value) {
+                switch (index) {
+                    case 0 -> FishingNetBlockEntity.this.progress = value;
+                    case 1 -> FishingNetBlockEntity.this.maxProgress = value;
+                }
             }
-        }
 
-        return ActionResult.SUCCESS;
+            @Override
+            public int size() {
+                return 2;
+            }
+        };
     }
+
+    @Override
+    public List<SyncableStorage> getSyncableStorages() {
+        var inventory = (SyncingSimpleInventory) this.inventoryStorage.getInventory(0);
+        assert inventory != null;
+        return List.of(inventory);
+    }
+
+    @Override
+    public void onTick() {
+
+    }
+
+    @Override
+    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
+        buf.writeBlockPos(this.pos);
+    }
+
+    @Override
+    public Text getDisplayName() {
+        return Text.literal("Fishing net");
+    }
+
+    @Override
+    public void writeNbt(NbtCompound nbt) {
+        nbt.put("Inventory", this.inventoryStorage.writeNbt());
+        nbt.putInt("BurnTime", this.progress);
+        nbt.putInt("FuelTime", this.maxProgress);
+    }
+
+    @Override
+    public void readNbt(NbtCompound nbt) {
+        this.inventoryStorage.readNbt(nbt.getList("Inventory", NbtElement.COMPOUND_TYPE));
+        this.progress = nbt.getInt("BurnTime");
+        this.maxProgress = nbt.getInt("FuelTime");
+    }
+
+
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return TickableBlockEntity.createTicker(world);
+    public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
+        return new FishingNetScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
 
-    @Nullable
-    @Override
-    public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+    public WrappedInventoryStorage<SimpleInventory> getWrappedInventoryStorage() {
+        return this.inventoryStorage;
     }
 
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+    public boolean isValid(ItemStack itemStack, int slot) {
+        return slot == 0;
     }
 }
