@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "barracuda:item/basstiary"
+  },
+  "display": {
+    "gui": {
+      "scale": [0, 0, 0]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "barracuda:item/gui/inventory_text_cover"
+  },
+  "display": {
+    "gui": {
+      "translation": [17, -17, 0],
+      "scale": [3.2, 1, 1]
+    }
+  }
+}

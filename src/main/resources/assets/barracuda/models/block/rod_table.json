@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "barracuda:block/rod_table_bottom",
+    "east": "barracuda:block/rod_table_side",
+    "north": "barracuda:block/rod_table_side",
+    "particle": "barracuda:block/rod_table_side",
+    "south": "barracuda:block/rod_table_side",
+    "up": "barracuda:block/rod_table_top",
+    "west": "barracuda:block/rod_table_side"
+  }
+}
