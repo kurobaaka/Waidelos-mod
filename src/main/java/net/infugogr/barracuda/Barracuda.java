@@ -52,7 +52,7 @@ public class Barracuda implements ModInitializer {
 		EnergyStorage.SIDED.registerForBlockEntity(FuelGeneratorBlockEntity::getEnergyProvider, ModBlockEntityType.FUEL_GENERATOR);
 		ItemStorage.SIDED.registerForBlockEntity(FuelGeneratorBlockEntity::getInventoryProvider, ModBlockEntityType.FUEL_GENERATOR);
 
-		// ItemStorage.SIDED.registerForBlockEntity(FishingNetBlockEntity::getInventoryProvider, ModBlockEntityType.FISHING_NET);
+		ItemStorage.SIDED.registerForBlockEntity(FishingNetBlockEntity::getInventoryProvider, ModBlockEntityType.FISHING_NET);
 
 		EnergyStorage.SIDED.registerForBlockEntity(SMESblockEntity::getEnergyProvider, ModBlockEntityType.SMES);
 		ItemStorage.SIDED.registerForBlockEntity(SMESblockEntity::getInventoryProvider, ModBlockEntityType.SMES);

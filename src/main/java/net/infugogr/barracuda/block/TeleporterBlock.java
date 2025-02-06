@@ -38,7 +38,6 @@ public class TeleporterBlock extends HorizontalFacingBlock implements BlockEntit
         //Govno govno = new Govno();
         //govno.setInPortal();
         //govno.tickPortal(entity);
-        Barracuda.LOGGER.info("Landed");
         super.onEntityLand(world, entity);
     }
 

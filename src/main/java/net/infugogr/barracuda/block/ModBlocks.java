@@ -60,7 +60,7 @@ public class ModBlocks {
     public static final Block MACHINE_FRAME = registerWithItemCopy("machine_frame",
             new MachineFrameBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
     public static final Block TELEPORTER = registerWithItemCopy("teleporter",
-            new TeleporterBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).ticksRandomly()));
+            new TeleporterBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK).nonOpaque()));
     public static final Block HVCABLE = registerWithItemCopy("hv_cable",
             new HVcableBlock(FabricBlockSettings.copyOf(Blocks.IRON_BLOCK)));
     public static final Block WALL_BLOCK = registerWithItemCopy("wall_block",

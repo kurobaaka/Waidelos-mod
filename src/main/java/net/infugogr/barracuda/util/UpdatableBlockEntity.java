@@ -6,7 +6,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.math.BlockPos;
 
-public abstract class UpdatableBlockEntity extends BlockEntity {
+public class UpdatableBlockEntity extends BlockEntity {
     protected boolean isDirty = false;
 
     public UpdatableBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {

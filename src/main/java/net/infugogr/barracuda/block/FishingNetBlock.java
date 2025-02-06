@@ -13,6 +13,7 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -31,14 +32,16 @@ public class FishingNetBlock extends BlockWithEntity implements BlockEntityProvi
     private static final MapCodec<FishingNetBlock> CODEC = createCodec(FishingNetBlock::new);
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     private static final VoxelShape SHAPE = Block.createCuboidShape(0, 0, 0, 16, 12, 16);
+    public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 
     public FishingNetBlock(Settings settings) {
         super(settings);
+        setDefaultState(getDefaultState().with(WATERLOGGED, false));
     }
 
-     @Override
+    @Override
     public FluidState getFluidState(BlockState state) {
-        return Fluids.WATER.getDefaultState();
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : super.getFluidState(state);
     }
 
     @Override
@@ -68,18 +71,6 @@ public class FishingNetBlock extends BlockWithEntity implements BlockEntityProvi
     }
 
     @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (state.getBlock() != newState.getBlock()) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof FishingNetBlockEntity) {
-                ItemScatterer.spawn(world, pos, (Inventory) blockEntity);
-                world.updateComparators(pos,this);
-            }
-            super.onStateReplaced(state, world, pos, newState, moved);
-        }
-    }
-
-    @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
             NamedScreenHandlerFactory screenHandlerFactory = ((FishingNetBlockEntity) world.getBlockEntity(pos));
@@ -100,10 +91,15 @@ public class FishingNetBlock extends BlockWithEntity implements BlockEntityProvi
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+        World world = ctx.getWorld();
+        BlockPos pos = ctx.getBlockPos();
+        return getDefaultState()
+                .with(FACING, ctx.getHorizontalPlayerFacing().getOpposite())
+                .with(WATERLOGGED, world.getFluidState(pos).getFluid() == Fluids.WATER);
     }
 
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        super.appendProperties(builder);
+        builder.add(WATERLOGGED, FACING);
     }
 }

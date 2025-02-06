@@ -30,11 +30,11 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.LoggerFactory;
 import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
 
 import java.util.List;
-import java.util.Objects;
 
 import static net.minecraft.block.entity.AbstractFurnaceBlockEntity.createFuelTimeMap;
 
@@ -71,7 +71,6 @@ public class FuelGeneratorBlockEntity extends UpdatableBlockEntity implements Sy
             }
         };
     }
-
     @Override
     public List<SyncableStorage> getSyncableStorages() {
         var energy = (SyncingEnergyStorage) this.energyStorage.getStorage(null);
@@ -79,47 +78,37 @@ public class FuelGeneratorBlockEntity extends UpdatableBlockEntity implements Sy
         assert inventory != null;
         return List.of(energy, inventory);
     }
-
     @Override
     public void onTick() {
         if (this.world == null || this.world.isClient)
             return;
 
-        SimpleEnergyStorage energyStorage = this.energyStorage.getStorage(null);
+        SimpleEnergyStorage energyStorage = (SimpleEnergyStorage) this.energyStorage.getStorage(null);
 
         spread(this.world, this.pos, energyStorage);
 
-        if (this.progress >0){
-            this.progress--;
-        }
-
-        if (energyStorage.getAmount() >= energyStorage.getCapacity()) {
-            if (energyStorage.getAmount() > energyStorage.getCapacity()){
-                energyStorage.amount -= (energyStorage.getAmount() - energyStorage.getCapacity());
-            }
+        if (energyStorage.getAmount() > energyStorage.getCapacity() - 20)
             return;
-        }
+
         if (this.progress > 0) {
-            energyStorage.amount += output;
+            this.progress--;
+            energyStorage.amount += 20;
+            update();
         } else {
             SimpleInventory inventory = this.inventoryStorage.getInventory(0);
-            assert inventory != null;
             ItemStack stack = inventory.getStack(0);
             if (isFuel(stack)) {
                 this.maxProgress = getFuelTime(stack);
                 this.progress = getFuelTime(stack);
-                this.output = getFuelTime(stack)/220;
                 stack.decrement(1);
                 update();
             }
         }
     }
-
     @Override
     public void writeScreenOpeningData(ServerPlayerEntity serverPlayerEntity, PacketByteBuf packetByteBuf) {
         packetByteBuf.writeBlockPos(this.pos);
     }
-
     @Override
     public void writeNbt(NbtCompound nbt) {
         nbt.put("EnergyStorage", this.energyStorage.writeNbt());
@@ -127,7 +116,6 @@ public class FuelGeneratorBlockEntity extends UpdatableBlockEntity implements Sy
         nbt.putInt("BurnTime", this.progress);
         nbt.putInt("FuelTime", this.maxProgress);
     }
-
     @Override
     public void readNbt(NbtCompound nbt) {
         this.energyStorage.readNbt(nbt.getList("EnergyStorage", NbtElement.COMPOUND_TYPE));
@@ -135,46 +123,36 @@ public class FuelGeneratorBlockEntity extends UpdatableBlockEntity implements Sy
         this.progress = nbt.getInt("BurnTime");
         this.maxProgress = nbt.getInt("FuelTime");
     }
-
     @Override
     public NbtCompound toInitialChunkDataNbt() {
         return createNbt();
     }
-
     @Override
     public Text getDisplayName() {
         return TITLE;
     }
-
     @Override
     public @Nullable ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
         return new FuelGeneratorScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
     }
-
     public boolean isFuel(ItemStack stack) {
         return createFuelTimeMap().containsKey(stack.getItem());
     }
-
     public int getFuelTime(ItemStack stack) {
         return createFuelTimeMap().getOrDefault(stack.getItem(), 0);
     }
-
     public WrappedInventoryStorage<SimpleInventory> getWrappedInventoryStorage() {
         return this.inventoryStorage;
     }
-
     public EnergyStorage getEnergyProvider(Direction direction) {
         return this.energyStorage.getStorage(direction);
     }
-
     public boolean isValid(ItemStack itemStack, int slot) {
         return slot == 0 && isFuel(itemStack);
     }
-
     public InventoryStorage getInventoryProvider(Direction direction) {
         return this.inventoryStorage.getStorage(direction);
     }
-
     @Nullable
     @Override
     public Packet<ClientPlayPacketListener> toUpdatePacket() {

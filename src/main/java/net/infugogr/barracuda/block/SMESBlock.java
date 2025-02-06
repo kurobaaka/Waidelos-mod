@@ -40,19 +40,6 @@ public class SMESBlock extends HorizontalFacingBlock implements BlockEntityProvi
         return ActionResult.SUCCESS;
     }
 
-    @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (state.getBlock() != newState.getBlock()) {
-            BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof SMESblockEntity sMESblockEntity) {
-                sMESblockEntity.getWrappedInventory().dropContents(world, pos);
-                world.updateComparators(pos, this);
-            }
-
-            super.onStateReplaced(state, world, pos, newState, moved);
-        }
-    }
-
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {

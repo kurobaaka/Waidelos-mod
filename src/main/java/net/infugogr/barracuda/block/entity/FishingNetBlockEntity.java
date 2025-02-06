@@ -1,6 +1,7 @@
 package net.infugogr.barracuda.block.entity;
 
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.fabricmc.fabric.api.transfer.v1.item.InventoryStorage;
 import net.infugogr.barracuda.item.ModItems;
 import net.infugogr.barracuda.screenhandler.FishingNetScreenHandler;
 import net.infugogr.barracuda.util.SyncableStorage;
@@ -27,6 +28,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -113,7 +115,9 @@ public class FishingNetBlockEntity extends UpdatableBlockEntity implements Synca
     public WrappedInventoryStorage<SimpleInventory> getWrappedInventoryStorage() {
         return this.inventoryStorage;
     }
-
+    public InventoryStorage getInventoryProvider(Direction direction) {
+        return this.inventoryStorage.getStorage(direction);
+    }
     public boolean isValid(ItemStack itemStack, int slot) {
         return slot == 0;
     }

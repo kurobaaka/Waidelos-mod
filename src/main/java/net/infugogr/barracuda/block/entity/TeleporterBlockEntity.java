@@ -28,15 +28,22 @@ import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.animatable.GeoBlockEntity;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.object.PlayState;
 import team.reborn.energy.api.EnergyStorage;
 import team.reborn.energy.api.base.SimpleEnergyStorage;
 
 import java.util.List;
 
-public class TeleporterBlockEntity extends UpdatableBlockEntity implements SyncableTickableBlockEntity, EnergySpreader, ExtendedScreenHandlerFactory{
+public class TeleporterBlockEntity extends UpdatableBlockEntity implements SyncableTickableBlockEntity, EnergySpreader, ExtendedScreenHandlerFactory, GeoBlockEntity {
     public static final Text TITLE = Barracuda.containerTitle("teleporter");
     private final WrappedEnergyStorage energyStorage = new WrappedEnergyStorage();
     private final WrappedInventoryStorage<SimpleInventory> inventoryStorage = new WrappedInventoryStorage<>();
+    private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     public TeleporterBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntityType.TELEPORTER, pos, state);
@@ -107,5 +114,20 @@ public class TeleporterBlockEntity extends UpdatableBlockEntity implements Synca
     }
     public WrappedInventoryStorage<SimpleInventory> getWrappedInventoryStorage() {
         return this.inventoryStorage;
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+        controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::predicate));
+    }
+
+    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
+        tAnimationState.getController().setAnimation(RawAnimation.begin().then("teleport", Animation.LoopType.LOOP));
+        return PlayState.CONTINUE;
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
     }
 }
